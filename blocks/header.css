@@ -1,5 +1,6 @@
 .header {
   border-bottom: 1px solid #545454;
+  /* border: 2px solid red; */
   max-width: 880px;
   height: 74px; /*this should probably use relative units*/
   margin: 0 auto 51px;
