@@ -1,8 +1,13 @@
-.main-page {
+.page {
   max-width: 1280px;
   height: 1217px;
   background-color: #000;
   color: #FFF;
   padding-top: 45px;
+  margin: 0 auto;
+}
+
+.page__content {
+  max-width: 880px;
   margin: 0 auto;
 }

@@ -1,9 +1,10 @@
 @import url(../vendor/normalize.css);
-@import url(../blocks/main-page.css);
+@import url(../blocks/page.css);
 @import url(../blocks/header.css);
 @import url(../blocks/profile.css);
 @import url(../blocks/avatar.css);
 @import url(../blocks/edit-button.css);
 @import url(../blocks/add-button.css);
 @import url(../blocks/cards.css);
+@import url(../blocks/cards__grid.css);
 @import url(../blocks/card.css);
