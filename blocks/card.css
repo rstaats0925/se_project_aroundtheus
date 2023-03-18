@@ -23,8 +23,10 @@
 }
 
 .card__caption {
-  font-size: 24px;
   margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 24px;
+  line-height: 1.2;
   font-weight: 900;
   text-overflow: ellipsis;
   white-space: nowrap;
