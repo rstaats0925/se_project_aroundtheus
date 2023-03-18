@@ -1,5 +1,4 @@
 .card {
-  /* border: 2px solid red; */
   color: #000;
   width: 282px;
   height: 361px;
@@ -14,7 +13,6 @@
 }
 
 .card__footer {
-  border: 2px solid red;
   background-color: #FFF;
   height: 79px;
   padding: 0 20px;
@@ -22,20 +20,19 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 0 0 10px 10px;
+}
+
+.card__caption {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 900;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.card__caption {
-  border: 2px solid red;
-  font-size: 24px;
-  margin: 0;
-  font-weight: 900;
-}
-
 .card__like-button {
-  border: 2px solid red;
+  border: none;
   box-sizing: border-box;
   width: 21px;
   height: 18px;

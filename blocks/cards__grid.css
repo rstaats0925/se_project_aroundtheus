@@ -1,8 +1,8 @@
 .cards__grid {
-  border: 2px solid red;
+  /* border: 2px solid red; */
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 282px);
+  grid-template-columns: repeat(auto-fit, 282px);
   gap: 20px 17px;
   list-style-type: none;
   margin-top: 72px;
