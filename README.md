@@ -8,12 +8,12 @@ This project is a webpage that uses responsive design to adpapt to varying scree
 
 This page was made using just HTML & CSS by utilizing Flexbox & grid to position the elements, media queries to make the page more responsive, & font-face to style the text.
 
-**Figma**
-
-- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
-
 **Images**
 
-![desktop] (./images/demo/desktop view.png)
-![tablet] (./images/demo/tablet-view.png)
-![mobile] (./images.demo/mobile-view.png)
+[desktop] (./images/demo/desktop view.png)
+[tablet] (./images/demo/tablet-view.png)
+[mobile] (./images.demo/mobile-view.png)
+
+## Github Pages
+
+[link to github pages] (https://rstaats0925.github.io/se_project_aroundtheus/)
