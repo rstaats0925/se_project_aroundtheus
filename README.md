@@ -1,21 +1,19 @@
 # Project 3: Around The U.S.
 
-### Overview  
+## Project Description
 
-* Intro  
-* Figma  
-* Images  
-  
-**Intro**
-  
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
-  
-**Figma**  
-  
-* [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)  
-  
-**Images**  
-  
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-  
-Good luck and have fun!
+This project is a webpage that uses responsive design to adpapt to varying screen sizes from 320px to 1280px. Going from biggest to smallest screensize the amount of columns start at 3 then reduce down to 2 at around 930px. As the screen compresses the profile will rearrange itself to a vertical orientation instead of a horizontal one. For the mobile screensize the cards will be in a single column.
+
+## Technologies Used
+
+This page was made using just HTML & CSS by utilizing Flexbox & grid to position the elements, media queries to make the page more responsive, & font-face to style the text.
+
+**Figma**
+
+- [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
+
+**Images**
+
+![desktop] (./images/demo/desktop view.png)
+![tablet] (./images/demo/tablet-view.png)
+![mobile] (./images.demo/mobile-view.png)
