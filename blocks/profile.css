@@ -8,7 +8,6 @@
 
 .profile__info {
   max-width: 415px;
-  max-width: 415px;
   display: grid;
   grid-template-columns: auto 24px;
   column-gap: 18px;
