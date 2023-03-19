@@ -8,7 +8,7 @@
   padding-left: 0;
 }
 
-@media  screen and (max-width: 896px) {
+@media  screen and (max-width: 936px) {
   .cards__grid {
     justify-content: center;
   }
