@@ -3,3 +3,7 @@
   /* border: 2px solid red; */
   max-width: 100%;
 }
+
+.header__logo {
+  margin-bottom: 41px;
+}

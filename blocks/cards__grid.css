@@ -7,3 +7,9 @@
   margin-top: 72px;
   padding-left: 0;
 }
+
+@media  screen and (max-width: 896px) {
+  .cards__grid {
+    justify-content: center;
+  }
+}

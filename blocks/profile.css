@@ -7,7 +7,6 @@
 }
 
 .profile__info {
-  /* contains name, edit box, & occupation */
   max-width: 415px;
   max-width: 415px;
   display: grid;
@@ -23,6 +22,9 @@
   font-size: 42px;
   line-height: 1.1;
   margin: 0;
+  /* text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; */
 }
 
 .profile__edit-button {
@@ -56,4 +58,27 @@
 
 .profile__add-button:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 730px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile__user-name {
+    font-size: 22px;
+  }
+
+  .profile__add-button {
+    margin-left: 0;
+    width: 282px;
+  }
 }
