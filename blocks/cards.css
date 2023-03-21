@@ -1,3 +1,7 @@
+.cards {
+  margin: 0 auto;
+}
+
 .cards__grid {
   width: 100%;
   display: grid;
@@ -5,6 +9,7 @@
   gap: 20px 17px;
   list-style-type: none;
   margin-top: 72px;
+  margin-bottom: 0;
   padding-left: 0;
 }
 
