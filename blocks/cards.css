@@ -9,15 +9,9 @@
   justify-content: center;
   gap: 20px 17px;
   list-style-type: none;
-  margin-top: 47px;
+  margin-top: 51px;
   margin-bottom: 0;
   padding-left: 0;
-}
-
-@media  screen and (max-width: 936px) {
-  .cards__grid {
-    justify-content: center;
-  }
 }
 
 @media screen and (max-width: 800px) {

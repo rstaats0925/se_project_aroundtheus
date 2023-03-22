@@ -1,22 +1,21 @@
 .footer {
-
+  border: 2px solid red;
+  max-width: 880px;
+  margin: 67px auto 60px;
 }
 
 .footer__copyright {
-  /* border: 2px solid red; */
-  max-width: 880px;
-  /* margin-left: 0; */
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 1.2;
   color: #545454;
-  margin: 67px auto 60px;
+  margin: 0;
 
 }
 
 @media screen and (max-width: 895px) {
-  .footer__copyright {
+  .footer {
     max-width: 584px;
     margin: 48px auto 36px;
     font-size: 14px;
@@ -24,7 +23,7 @@
 }
 
 @media screen and (max-width: 635px) {
-  .footer__copyright {
+  .footer {
     max-width: 282px;
   }
 }
