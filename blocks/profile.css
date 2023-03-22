@@ -3,14 +3,13 @@
   margin: 40px auto 0;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .profile__info {
   display: grid;
   grid-template-columns: auto 24px;
   column-gap: 18px;
-  row-gap: 16px;
+  row-gap: 8px;
   align-items: center;
 
 }
@@ -18,7 +17,8 @@
 .profile__user-name {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 42px;
-  line-height: 1.1;
+  font-weight: 500;
+  line-height: 1.14;
   margin: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -49,10 +49,11 @@
 
 .profile__add-button {
   box-sizing: border-box;
+  border-radius: 2px;
   width: 150px;
   height: 50px;
   border: 2px solid white;
-  background: url(../images/add-icon.svg) no-repeat center;
+  /* background: url(../images/add-icon.svg) no-repeat center; */
   background-color: transparent;
   margin-left: auto;
   cursor: pointer;
@@ -64,21 +65,21 @@
 
 @media screen and (max-width: 800px) {
   .profile {
-    display: flex;
     flex-direction: column;
-    align-content: center;
     justify-content: center;
   }
 
   .profile__info {
     margin-top: 30px;
     margin-bottom: 36px;
-    column-gap: none;
+    row-gap: 14px;
+    column-gap: 10px;
     justify-items: center;
   }
 
   .profile__user-name {
     font-size: 30px;
+    line-height: 1.2;
   }
 
   .profile__subtext {
@@ -89,16 +90,27 @@
   .profile__add-button {
     margin-left: 0;
     width: 282px;
+    height: 50px;
     padding: 0;
   }
 }
 
-@media screen and (max-width: 635px) {
+@media screen and (max-width: 620px) {
   .profile__user-name {
     font-size: 22px;
   }
 
   .profile__subtext {
     font-size: 14px;
+  }
+
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__add-icon {
+    width: 16px;
+    height: 16px;
   }
 }

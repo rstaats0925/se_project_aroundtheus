@@ -1,7 +1,5 @@
 .card {
   color: #000;
-  width: 282px;
-  height: 361px;
   display: flex;
   flex-direction: column;
 }
@@ -14,8 +12,8 @@
 
 .card__footer {
   background-color: #FFF;
-  height: 79px;
-  padding: 0 20px;
+  height: 25px 20px;
+  padding: 25px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,4 +39,10 @@
   background-image: url(../images/heart.svg);
   background-position: center;
   background-color: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
 }

@@ -9,7 +9,7 @@
   </head>
   <body class="page">
     <div class="page__content">
-      <header class="header">
+      <header class="header page__section">
         <img
           class="header__logo"
           src="./images/logo-around-the-us.svg"
@@ -21,14 +21,20 @@
           <img
             class="avatar"
             src="./images/jacques-cousteau.jpg"
-            alt="photo of jacques-cousteau"
+            alt="jacques-cousteau"
           />
           <div class="profile__info">
             <h1 class="profile__user-name">Jacques Cousteau</h1>
-            <button class="profile__edit-button"></button>
+            <button class="profile__edit-button" type="button"></button>
             <p class="profile__subtext">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button class="profile__add-button" type="button">
+            <img
+              class="profile__add-icon"
+              src="./images/add-icon.svg"
+              alt="add icon"
+            />
+          </button>
         </section>
         <section class="cards page__section">
           <ul class="cards__grid">
@@ -101,8 +107,8 @@
           </ul>
         </section>
       </main>
-      <footer class="footer">
-        <p class="footer__copyright">copyright Around the U.S.</p>
+      <footer class="footer page__section">
+        <p class="footer__copyright">&#169Around the U.S.</p>
       </footer>
     </div>
   </body>
