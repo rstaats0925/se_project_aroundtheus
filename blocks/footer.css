@@ -1,5 +1,4 @@
 .footer {
-  border: 2px solid red;
   max-width: 880px;
   margin: 67px auto 60px;
 }
@@ -18,6 +17,9 @@
   .footer {
     max-width: 584px;
     margin: 48px auto 36px;
+  }
+
+  .footer__copyright {
     font-size: 14px;
   }
 }
