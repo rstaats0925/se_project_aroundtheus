@@ -1,4 +1,4 @@
-let initialCards = [
+let initialCards = [ 
   {
     name: "Grand Canyon",
     link: "https://unsplash.com/photos/ZZnH4GOzDgc"
@@ -29,3 +29,14 @@ let initialCards = [
     link: "https://unsplash.com/photos/sf8b4ucpdkg"
   } 
 ]
+
+const profileEditButton = document.querySelector("#profile-edit-btn");
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const modalCloseButton = document.querySelector("#modal-close-button");
+
+function toggleProfileEditModal() {
+  profileEditModal.classList.toggle("modal__open");
+}
+
+profileEditButton.addEventListener("click", toggleProfileEditModal);
+modalCloseButton.addEventListener("click", toggleProfileEditModal);

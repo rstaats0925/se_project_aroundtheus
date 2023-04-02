@@ -1,9 +1,3 @@
-.modal__open {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .modal {
   position: fixed;
   top: 0;
@@ -12,10 +6,14 @@
   bottom: 0;
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 19px;
+  display: none;
+}
+
+.modal__open {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 19px;
 }
 
 .modal__container {
