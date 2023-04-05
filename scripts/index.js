@@ -64,7 +64,7 @@ function fillProfileForm() {
 }
 
 function getCardElement(data) {
-  let cardElement = cardTemplate.cloneNode(true);
+  const cardElement = cardTemplate.cloneNode(true);
   let cardImage = cardElement.querySelector(".card__image");
   let cardCaption = cardElement.querySelector(".card__caption");
   cardImage.src = data.link;
