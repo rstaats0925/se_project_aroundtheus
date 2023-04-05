@@ -1,4 +1,4 @@
-let initialCards = [ 
+const initialCards = [ 
   {
     name: "Grand Canyon",
     link: "https://images.unsplash.com/photo-1615551043360-33de8b5f410c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
@@ -33,29 +33,37 @@ let initialCards = [
 //elements
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const modalCloseButton = document.querySelector("#modal-close-button");
-const profileUsername = document.querySelector(".profile__user-name");
-const modalInputUsername = document.querySelector("#modal-input-username");
+const editProfileModalCloseButton = profileEditModal.querySelector("#modal-close-button");
+const profileUserName = document.querySelector(".profile__user-name");
+const modalInputUserName = document.querySelector("#modal-input-username");
 const profileSubtext = document.querySelector('.profile__subtext');
 const modalInputSubtext = document.querySelector("#modal-input-subtext");
 const modalEditForm = profileEditModal.querySelector(".modal__form");
-// const cardElement = document.querySelector("#card-template").content.firstElementChild;
+const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+const cardsGrid = document.querySelector(".cards__grid");
 
-function applyFormInputValues(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
-  profileUsername.textContent = modalInputUsername.value;
+  profileUserName.textContent = modalInputUserName.value;
   profileSubtext.textContent = modalInputSubtext.value;
+  closeModal();
+}
+
+function openModal() {
+  profileEditModal.classList.add("modal__open");
+  fillProfileForm();
+}
+
+function closeModal() {
   profileEditModal.classList.remove("modal__open");
 }
 
-function toggleProfileEditModal(event) {
-  modalInputUsername.value = profileUsername.textContent;
+function fillProfileForm() {
+  modalInputUserName.value = profileUserName.textContent;
   modalInputSubtext.value = profileSubtext.textContent;
-  profileEditModal.classList.toggle("modal__open");
 }
 
 function getCardElement(data) {
-  const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
   let cardElement = cardTemplate.cloneNode(true);
   let cardImage = cardElement.querySelector(".card__image");
   let cardCaption = cardElement.querySelector(".card__caption");
@@ -66,10 +74,9 @@ function getCardElement(data) {
 }
 
 for (card of initialCards) {
-  const cardsGrid = document.querySelector(".cards__grid");
   cardsGrid.append(getCardElement(card));
 }
 
-profileEditButton.addEventListener("click", toggleProfileEditModal);
-modalCloseButton.addEventListener("click", toggleProfileEditModal);
-modalEditForm.addEventListener("submit", applyFormInputValues);
+profileEditButton.addEventListener("click", openModal);
+editProfileModalCloseButton.addEventListener("click", closeModal);
+modalEditForm.addEventListener("submit", handleProfileFormSubmit);
