@@ -73,9 +73,9 @@ function getCardElement(data) {
   return cardElement;
 }
 
-for (card of initialCards) {
-  cardsGrid.append(getCardElement(card));
-}
+initialCards.forEach((item) =>{
+  cardsGrid.append(getCardElement(item))
+});
 
 profileEditButton.addEventListener("click", openModal);
 editProfileModalCloseButton.addEventListener("click", closeModal);
