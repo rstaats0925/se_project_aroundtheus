@@ -63,7 +63,6 @@ function addCard(event) {
   }
   const newCard = getCardElement(cardData);
   cardsGrid.prepend(newCard);
-  initialCards.unshift(cardData);
   addCardTitleInput.value = "";
   addCardLinkInput.value = "";
   closeModal(addCardModal);
@@ -86,9 +85,13 @@ function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardCaption = cardElement.querySelector(".card__caption");
+  const likeButton = cardElement.querySelector(".card__like-button");
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardCaption.textContent = data.name;
+  likeButton.addEventListener("click", ()=>{
+    likeButton.classList.toggle("card__like-button_inactive");
+  })
   return cardElement;
 }
 
