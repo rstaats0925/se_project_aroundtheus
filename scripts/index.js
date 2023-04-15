@@ -68,6 +68,11 @@ function addCard(event) {
   closeModal(addCardModal);
 }
 
+function deleteCard(event) {
+  const deleteButton = event.target;
+  deleteButton.closest(".card").remove();
+}
+
 function openModal(modal) {
   modal.classList.add("modal__open");
 }
@@ -86,16 +91,22 @@ function getCardElement(data) {
   const cardImage = cardElement.querySelector(".card__image");
   const cardCaption = cardElement.querySelector(".card__caption");
   const likeButton = cardElement.querySelector(".card__like-button");
+  const deleteButton = cardElement.querySelector(".card__delete");
+  
   cardImage.src = data.link;
   cardImage.alt = data.name;
   cardCaption.textContent = data.name;
+  
   likeButton.addEventListener("click", ()=>{
     likeButton.classList.toggle("card__like-button_inactive");
   })
+
+  deleteButton.addEventListener("click", deleteCard);
+
   return cardElement;
 }
 
-//render cards onto page
+//render intial cards onto page
 initialCards.forEach((item) =>{
   cardsGrid.append(getCardElement(item))
 });
