@@ -27,6 +27,7 @@ HTML5 CSS3 & vanilla Javascript.
 -rename identifiers to make their purpose clearer
 
 -Organize Global Variables
+
 Right now the global variables are a wall of text
 with no organization. This can be improved by grouping
 together variables either by similarity i.e. all modal
@@ -36,6 +37,7 @@ i.e. all variables that are part of the edit profile modal,
 all variables that are part of the add-card modal etc.
 
 -Organize Function Declarations
+
 The same could be said about the function declarations.
 Functions that handle opening & closing modals should be
 grouped together, as should functions that handle adding
@@ -43,6 +45,7 @@ grouped together, as should functions that handle adding
 as the handleProfileSubmitForm & fillProfileForm
 
 -CSS Fonts
+
 If you look over the CSS source code you'll probably notice
 that the same font-family & fallback fonts are declared for
 every bit of text. This isn't very D.R.Y. This could be
@@ -55,6 +58,7 @@ more attention anyway.
 #### Additions
 
 -Edit Profile Picture
+
 As it stands there's no way of changing the profile picture.
 If the user changes the profile username & subtext then it
 stands to reason that the user would also want to change the
@@ -66,6 +70,7 @@ element in the profile section of the html (index.html line 13)
 & replacing the src attribute with the one submitted in the form.
 
 -Database For Images
+
 Any images that get added to the page are erased & cards that are
 deleted get reinstated as soon as the page gets refreshed. This is
 because the data is being read from a single JS file & so new data
