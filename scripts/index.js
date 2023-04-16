@@ -46,6 +46,8 @@ const addButton = document.querySelector("#add-button");
 const modalAddCardCloseButton = document.querySelector("#add-card-close-button");
 const addCardTitleInput = addCardModal.querySelector("#modal-input-title");
 const addCardLinkInput = addCardModal.querySelector("#modal-image-link");
+const imageModal = document.querySelector("#image-modal");
+const imageModalCloseButton = document.getElementById("image-modal-close-button");
 
 //functions
 function handleProfileFormSubmit(event) {
@@ -101,6 +103,14 @@ function getCardElement(data) {
     likeButton.classList.toggle("card__like-button_inactive");
   })
 
+  cardImage.addEventListener("click", function(event) {
+    const imageElement = imageModal.querySelector(".modal__image");
+    const imageCaption = imageModal.querySelector(".modal__image-caption");
+    imageElement.src = event.target.src;
+    imageCaption.textContent = event.target.alt;
+    openModal(imageModal);
+  });
+
   deleteButton.addEventListener("click", deleteCard);
 
   return cardElement;
@@ -127,6 +137,10 @@ addButton.addEventListener("click", ()=>{
 
 modalAddCardCloseButton.addEventListener("click", ()=>{
   closeModal(addCardModal);
+});
+
+imageModalCloseButton.addEventListener("click", ()=>{
+  closeModal(imageModal);
 });
 
 modalEditForm.addEventListener("submit", handleProfileFormSubmit);
