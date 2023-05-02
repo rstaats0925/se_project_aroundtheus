@@ -146,6 +146,53 @@ function getCardElement(data) {
   return cardElement;
 }
 
+//form validation
+
+function showError(formElement, inputElement, errorMessage) {
+  const inputErrorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputErrorElement.textContent = errorMessage;
+  inputErrorElement.classList.add(".modal__input-error_active");
+  inputElement.classList.add(".modal__input-error");
+}
+
+function hideError(formElement, inputElement) {
+  const inputErrorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputErrorElement.classList.remove(".modal__input-error_active");
+  inputErrorElement.textContent = "";
+  inputElement.classList.remove(".modal__input-error");
+}
+
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideError(formElement, inputElement);
+  }
+}
+
+function addEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      checkInputValidity(formElement, inputElement);
+    });
+  });
+}
+
+function setAllEventListeners() {
+  const formList = Array.from(document.querySelectorAll(".modal__form"));
+  formList.forEach((formElement) => {
+    //add submit listener to form & prevent default browser behavior
+    formElement.addEventListener("submit", (event) => {
+      event.preventDefault;
+    });
+    //add event listener to inputs
+    addEventListeners(formElement);
+  });
+}
+
+setAllEventListeners();
+
 //render intial cards onto page
 initialCards.forEach((item) =>{
   cardsGrid.append(getCardElement(item))

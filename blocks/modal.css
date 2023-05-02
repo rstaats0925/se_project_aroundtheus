@@ -81,7 +81,7 @@
   border-bottom: 1px solid #F00;
 }
 
-.modal__input_error_active {
+.modal__input-error_active {
   /*<span>*/
   color: #F00;
   font: 400 12px 'Inter', Arial, sans-serif;
