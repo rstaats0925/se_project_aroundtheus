@@ -44,7 +44,7 @@ const cardsGrid = document.querySelector(".cards__grid");
 const addCardModal = document.querySelector("#add-card-modal");
 const addButton = document.querySelector("#add-button");
 const modalAddCardCloseButton = document.querySelector("#add-card-close-button");
-const addCardTitleInput = addCardModal.querySelector("#modal-input-title");
+const addCardTitleInput = addCardModal.querySelector("#image-input-title");
 const addCardLinkInput = addCardModal.querySelector("#modal-image-link");
 const imageModal = document.querySelector("#image-modal");
 const imageModalCloseButton = document.getElementById("image-modal-close-button");
@@ -87,6 +87,8 @@ function openProfileModal() {
 
 function openCardModal() {
   openModal(addCardModal);
+  const saveButton = addCardModal.querySelector(".modal__save-button");
+  saveButton.classList.add("modal__save-button_disabled");
 }
 
 function openImageModal(event) {
@@ -119,6 +121,7 @@ function closeProfileModal() {
 
 function closeCardModal() {
   closeModal(addCardModal);
+  const modalButton = addCardModal.querySelector(".modal__save-button");
 }
 
 function closeImageModal() {
@@ -148,35 +151,53 @@ function getCardElement(data) {
 
 //form validation
 
-function showError(formElement, inputElement, errorMessage) {
-  const inputErrorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputErrorElement.textContent = errorMessage;
-  inputErrorElement.classList.add(".modal__input-error_active");
-  inputElement.classList.add(".modal__input-error");
+function showError(modal, inputElement) {
+  const errorElement = modal.querySelector(`.${inputElement.id}-error`);
+  errorElement.textContent = inputElement.validationMessage;
+  errorElement.classList.add("modal__input-error_active");
+  inputElement.classList.add("modal__input-error");
 }
 
-function hideError(formElement, inputElement) {
-  const inputErrorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputErrorElement.classList.remove(".modal__input-error_active");
-  inputErrorElement.textContent = "";
-  inputElement.classList.remove(".modal__input-error");
+function hideError(modal, inputElement) {
+  const errorElement = modal.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("modal__input-error");
+  errorElement.classList.remove("modal__input-error_active");
+  errorElement.textContent = "";
 }
 
-function checkInputValidity(formElement, inputElement) {
+function checkInputValidity(modal, inputElement) {
   if (!inputElement.validity.valid) {
-    showError(formElement, inputElement, inputElement.validationMessage);
+    showError(modal, inputElement);
   } else {
-    hideError(formElement, inputElement);
+    hideError(modal, inputElement);
   }
 }
 
-function addEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
+function addEventListeners(modal) {
+  const form = modal.querySelector(".modal__form");
+  const inputList = Array.from(form.querySelectorAll(".modal__input"));
+  const buttonElement = modal.querySelector(".modal__save-button");
+  
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(modal, inputElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
+}
+
+function isInvalid(inputList){
+  return (inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  }))
+}
+
+function toggleButtonState(inputList, buttonElement) {
+  if (isInvalid(inputList)) {
+    buttonElement.classList.add("modal__save-button_disabled");
+  } else {
+    buttonElement.classList.remove("modal__save-button_disabled");
+  }
 }
 
 function setAllEventListeners() {
@@ -191,7 +212,7 @@ function setAllEventListeners() {
   });
 }
 
-setAllEventListeners();
+// setAllEventListeners();
 
 //render intial cards onto page
 initialCards.forEach((item) =>{
