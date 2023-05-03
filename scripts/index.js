@@ -121,7 +121,7 @@ function closeProfileModal() {
 
 function closeCardModal() {
   closeModal(addCardModal);
-  const modalButton = addCardModal.querySelector(".modal__save-button");
+  addCardModal.querySelector(".modal__form").reset();
 }
 
 function closeImageModal() {
@@ -158,63 +158,58 @@ function showError(formElement, inputElement) {
   errorElement.textContent = inputElement.validationMessage;
 }
 
-// function hideError(modal, inputElement) {
-//   const errorElement = modal.querySelector(`.${inputElement.id}-error`);
-//   inputElement.classList.remove("modal__input-error");
-//   errorElement.classList.remove("modal__input-error_active");
-//   errorElement.textContent = "";
-// }
-
-// function checkInputValidity(modal, inputElement) {
-//   if (!inputElement.validity.valid) {
-//     showError(modal, inputElement);
-//   } else {
-//     hideError(modal, inputElement);
-//   }
-// }
-
-// function addEventListeners(modal) {
-//   const form = modal.querySelector(".modal__form");
-//   const inputList = Array.from(form.querySelectorAll(".modal__input"));
-//   const buttonElement = modal.querySelector(".modal__save-button");
-  
-//   inputList.forEach((inputElement) => {
-//     inputElement.addEventListener("input", () => {
-//       checkInputValidity(modal, inputElement);
-//       toggleButtonState(inputList, buttonElement);
-//     });
-//   });
-// }
-
-// function isInvalid(inputList){
-//   return (inputList.some((inputElement) => {
-//     return !inputElement.validity.valid;
-//   }))
-// }
-
-// function toggleButtonState(inputList, buttonElement) {
-//   if (isInvalid(inputList)) {
-//     buttonElement.classList.add("modal__save-button_disabled");
-//   } else {
-//     buttonElement.classList.remove("modal__save-button_disabled");
-//   }
-// }
-
-function setInputEventListeners() {
-  //grab an array of forms
-  const formList = Array.from(document.forms);
-   
-  // formList.forEach((formElement) => {
-  //   //add submit listener to form & prevent default browser behavior
-  //   formElement.addEventListener("submit", (event) => {
-  //     event.preventDefault;
-  //   });
-  //   //add event listener to inputs
-  //   addEventListeners(formElement);
-  // });
+function hideError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("modal__input-error");
+  errorElement.classList.remove("modal__input-error_active");
+  errorElement.textContent = "";
 }
 
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showError(formElement, inputElement);
+  } else {
+    hideError(formElement, inputElement);
+  }
+}
 
+function addEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll(".modal__input"));
+  const buttonElement = formElement.querySelector(".modal__save-button");
+  
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+}
+
+function isInvalid(inputList){
+  return (inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  }))
+}
+
+function toggleButtonState(inputList, buttonElement) {
+  if (isInvalid(inputList)) {
+    buttonElement.classList.add("modal__save-button_disabled");
+  } else {
+    buttonElement.classList.remove("modal__save-button_disabled");
+  }
+}
+
+function addAllEventListeners() {
+  //grab an array that contains all of the page's forms
+  const formList = Array.from(document.forms);
+   
+  formList.forEach((formElement) => {
+  //   //add event listener to inputs
+    addEventListeners(formElement);
+  });
+}
+
+addAllEventListeners();
 
 //render intial cards onto page
 initialCards.forEach((item) =>{
