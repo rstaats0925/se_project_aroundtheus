@@ -151,68 +151,70 @@ function getCardElement(data) {
 
 //form validation
 
-function showError(modal, inputElement) {
-  const errorElement = modal.querySelector(`.${inputElement.id}-error`);
-  errorElement.textContent = inputElement.validationMessage;
+function showError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   errorElement.classList.add("modal__input-error_active");
   inputElement.classList.add("modal__input-error");
+  errorElement.textContent = inputElement.validationMessage;
 }
 
-function hideError(modal, inputElement) {
-  const errorElement = modal.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove("modal__input-error");
-  errorElement.classList.remove("modal__input-error_active");
-  errorElement.textContent = "";
-}
+// function hideError(modal, inputElement) {
+//   const errorElement = modal.querySelector(`.${inputElement.id}-error`);
+//   inputElement.classList.remove("modal__input-error");
+//   errorElement.classList.remove("modal__input-error_active");
+//   errorElement.textContent = "";
+// }
 
-function checkInputValidity(modal, inputElement) {
-  if (!inputElement.validity.valid) {
-    showError(modal, inputElement);
-  } else {
-    hideError(modal, inputElement);
-  }
-}
+// function checkInputValidity(modal, inputElement) {
+//   if (!inputElement.validity.valid) {
+//     showError(modal, inputElement);
+//   } else {
+//     hideError(modal, inputElement);
+//   }
+// }
 
-function addEventListeners(modal) {
-  const form = modal.querySelector(".modal__form");
-  const inputList = Array.from(form.querySelectorAll(".modal__input"));
-  const buttonElement = modal.querySelector(".modal__save-button");
+// function addEventListeners(modal) {
+//   const form = modal.querySelector(".modal__form");
+//   const inputList = Array.from(form.querySelectorAll(".modal__input"));
+//   const buttonElement = modal.querySelector(".modal__save-button");
   
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", () => {
-      checkInputValidity(modal, inputElement);
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
+//   inputList.forEach((inputElement) => {
+//     inputElement.addEventListener("input", () => {
+//       checkInputValidity(modal, inputElement);
+//       toggleButtonState(inputList, buttonElement);
+//     });
+//   });
+// }
+
+// function isInvalid(inputList){
+//   return (inputList.some((inputElement) => {
+//     return !inputElement.validity.valid;
+//   }))
+// }
+
+// function toggleButtonState(inputList, buttonElement) {
+//   if (isInvalid(inputList)) {
+//     buttonElement.classList.add("modal__save-button_disabled");
+//   } else {
+//     buttonElement.classList.remove("modal__save-button_disabled");
+//   }
+// }
+
+function setInputEventListeners() {
+  //grab an array of forms
+  const formList = Array.from(document.forms);
+   
+  // formList.forEach((formElement) => {
+  //   //add submit listener to form & prevent default browser behavior
+  //   formElement.addEventListener("submit", (event) => {
+  //     event.preventDefault;
+  //   });
+  //   //add event listener to inputs
+  //   addEventListeners(formElement);
+  // });
 }
 
-function isInvalid(inputList){
-  return (inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  }))
-}
 
-function toggleButtonState(inputList, buttonElement) {
-  if (isInvalid(inputList)) {
-    buttonElement.classList.add("modal__save-button_disabled");
-  } else {
-    buttonElement.classList.remove("modal__save-button_disabled");
-  }
-}
-
-function setAllEventListeners() {
-  const formList = Array.from(document.querySelectorAll(".modal__form"));
-  formList.forEach((formElement) => {
-    //add submit listener to form & prevent default browser behavior
-    formElement.addEventListener("submit", (event) => {
-      event.preventDefault;
-    });
-    //add event listener to inputs
-    addEventListeners(formElement);
-  });
-}
-
-// setAllEventListeners();
 
 //render intial cards onto page
 initialCards.forEach((item) =>{
