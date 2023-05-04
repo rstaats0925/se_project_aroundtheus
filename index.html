@@ -48,7 +48,7 @@
     </div>
 
     <div class="modal" id="profile-edit-modal">
-      <div class="modal__container">
+      <div class="modal__container" id="profile-modal">
         <button class="modal__close-button" id="modal-close-button"></button>
         <h2 class="modal__header">Edit Profile</h2>
         <form class="modal__form" id="profile-edit-form" novalidate>
@@ -62,7 +62,7 @@
             maxlength="40"
             required
           />
-          <span class="modal-input-username-error"></span>
+          <span class="input-error" id="modal-input-username-error"></span>
           <input
             class="modal__input"
             id="modal-input-subtext"
@@ -73,7 +73,7 @@
             maxlength="200"
             required
           />
-          <span class="modal-input-subtext-error"></span>
+          <span class="input-error" id="modal-input-subtext-error"></span>
           <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
@@ -94,7 +94,7 @@
             maxlength="30"
             required
           />
-          <span class="image-input-title-error"></span>
+          <span class="input-error" id="image-input-title-error"></span>
           <input
             class="modal__input"
             id="modal-image-link"
@@ -103,10 +103,11 @@
             placeholder="image link"
             required
           />
-          <span class="modal-image-link-error"></span>
+          <span class="input-error" id="modal-image-link-error"></span>
           <button
             class="modal__save-button modal__save-button_disabled"
             type="submit"
+            disabled
           >
             Save
           </button>
@@ -137,5 +138,6 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
