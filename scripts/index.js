@@ -59,6 +59,8 @@ function handleProfileFormSubmit(event) {
 
 function addCard(event) {
   event.preventDefault();
+  const inputList = [...addCardModal.querySelectorAll(".modal__input")];
+  const submitButton = addCardModal.querySelector(".modal__save-button");
   const cardData = {
     name: addCardTitleInput.value,
     link: addCardLinkInput.value
@@ -66,6 +68,7 @@ function addCard(event) {
   const newCard = getCardElement(cardData);
   cardsGrid.prepend(newCard);
   addCardModal.querySelector(".modal__form").reset();
+  toggleButtonState(inputList, submitButton, {inactiveButtonClass});
   closeModal(addCardModal);
 }
 
