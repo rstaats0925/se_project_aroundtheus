@@ -60,7 +60,7 @@ function handleProfileFormSubmit(event) {
 function addCard(event) {
   event.preventDefault();
   const inputList = [...addCardModal.querySelectorAll(".modal__input")];
-  const submitButton = addCardModal.querySelector(".modal__save-button");
+  const submitButton = addCardModal.querySelector(config.submitButtonSelector); 
   const cardData = {
     name: addCardTitleInput.value,
     link: addCardLinkInput.value
@@ -68,7 +68,7 @@ function addCard(event) {
   const newCard = getCardElement(cardData);
   cardsGrid.prepend(newCard);
   addCardModal.querySelector(".modal__form").reset();
-  toggleButtonState(inputList, submitButton, config.inactiveButtonClass);
+  toggleButtonState(inputList, submitButton, config);
   closeModal(addCardModal);
 }
 
@@ -81,26 +81,22 @@ function deleteCard(event) {
 
 function openModal(modal) {
   modal.classList.add("modal__open");
+  modal.addEventListener("mousedown", closeModalOnRemoteClick);
+  document.addEventListener("keydown", closeModalByEscapeKey);
 }
 
 function openProfileModal() {
   openModal(profileEditModal);
   fillProfileForm();
-  profileEditModal.addEventListener("mousedown", closeModalOnRemoteClick);
-  document.addEventListener("keydown", closeModalByEscapeKey);
 }
 
 function openCardModal() {
   openModal(addCardModal);
-  addCardModal.addEventListener("mousedown", closeModalOnRemoteClick);
-  document.addEventListener("keydown", closeModalByEscapeKey);
 }
 
 function openImageModal(event) {
   openModal(imageModal);
   handleImageModalInfo(event);
-  imageModal.addEventListener("mousedown", closeModalOnRemoteClick);
-  document.addEventListener("keydown", closeModalByEscapeKey);
 }
 
 function handleImageModalInfo(event) {
@@ -120,24 +116,20 @@ function fillProfileForm() {
 
 function closeModal(modal) {
   modal.classList.remove("modal__open");
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+  document.removeEventListener("keydown", closeModalByEscapeKey);
 }
 
 function closeProfileModal() {
   closeModal(profileEditModal);
-  profileEditModal.removeEventListener("mousedown", closeModalOnRemoteClick);
-  document.removeEventListener("keydown", closeModalByEscapeKey);
 }
 
 function closeCardModal() {
   closeModal(addCardModal);
-  addCardModal.removeEventListener("mousedown", closeModalOnRemoteClick);
-  document.removeEventListener("keydown", closeModalByEscapeKey);
 }
 
 function closeImageModal() {
   closeModal(imageModal);
-  imageModal.removeEventListener("mousedown", closeModalOnRemoteClick);
-  document.removeEventListener("keydown", closeModalByEscapeKey);
 }
 
 function getCardElement(data) {
@@ -184,20 +176,10 @@ function closeModalByEscapeKey(event) {
 profileEditButton.addEventListener("click", openProfileModal);
 editProfileModalCloseButton.addEventListener("click", closeProfileModal);
 
-profileEditModal.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closeProfileModal(profileEditModal);
-  }
-})
 
 addButton.addEventListener("click", openCardModal);
 modalAddCardCloseButton.addEventListener("click", closeCardModal);
 
-addCardModal.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closeCardModal(addCardModal);
-  }
-})
 
 imageModalCloseButton.addEventListener("click", closeImageModal);
 
