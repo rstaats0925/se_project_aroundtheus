@@ -1,3 +1,5 @@
+import * as utils from "../utils/utils.js";
+
 export default class Card {
   #newCard;
 
@@ -33,14 +35,29 @@ export default class Card {
     event.target.classList.toggle("card__like-button_inactive");
   }
 
+  #addDeleteButtonEventListener(card) {
+    this.deleteButton = card.querySelector(".card__delete");
+    this.deleteButton.addEventListener("click", utils.deleteCard);
+  }
+
+  #addImageEventListener (card) {
+    this.image = card.querySelector(".card__image");
+    this.image.addEventListener("click", utils.openImageModal);
+  }
+
   #addEventListeners (card) {
     this.#addLikeButtonEventListener(card);
+    this.#addDeleteButtonEventListener(card);
+    this.#addImageEventListener(card);
+  }
+
+  #completeNewCard () {
+    this.#fillMarkupWithData(this.#newCard);
+    this.#addEventListeners(this.#newCard);
+    return this.#newCard;
   }
 
   returnCard () {
-    this.#fillMarkupWithData(this.#newCard);
-    this.#addEventListeners(this.#newCard);
-
-    return this.#newCard;
+    return this.#completeNewCard();
   }
 }
