@@ -32,13 +32,6 @@ const initialCards = [
   } 
 ];
 
-const desertData = {
-  name: "Sahara Desert",
-  link: "https://images.unsplash.com/photo-1486314030120-d5ab85fe58cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
-}
-
-const desertCard = new Card(desertData, "#card-template").returnCard();
-
 //variables
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -59,7 +52,14 @@ const imageModal = document.querySelector("#image-modal");
 const imageModalCloseButton = document.getElementById("image-modal-close-button");
 const profileModalContainer =document.getElementById("profile-modal");
 
-// cardsGrid.append(desertCard);
+
+const desertData = {
+  name: "Sahara Desert",
+  link: "https://images.unsplash.com/photo-1486314030120-d5ab85fe58cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+}
+
+const desertCard = new Card(desertData, "#card-template").returnCard();
+cardsGrid.append(desertCard);
 
 //functions
 function handleProfileFormSubmit(event) {
