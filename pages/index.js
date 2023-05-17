@@ -30,7 +30,14 @@ const initialCards = [
     name: "Statue of Liberty",
     link: "https://images.unsplash.com/photo-1605130284535-11dd9eedc58a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"
   } 
-]
+];
+
+const desertData = {
+  name: "Sahara Desert",
+  link: "https://images.unsplash.com/photo-1486314030120-d5ab85fe58cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=876&q=80"
+}
+
+const desertCard = new Card(desertData, "#card-template").returnCard();
 
 //variables
 const profileEditButton = document.querySelector("#profile-edit-btn");
@@ -51,6 +58,9 @@ const addCardLinkInput = addCardModal.querySelector("#modal-image-link");
 const imageModal = document.querySelector("#image-modal");
 const imageModalCloseButton = document.getElementById("image-modal-close-button");
 const profileModalContainer =document.getElementById("profile-modal");
+
+// cardsGrid.append(desertCard);
+
 //functions
 function handleProfileFormSubmit(event) {
   event.preventDefault();

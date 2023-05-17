@@ -5,9 +5,24 @@ export default class Card {
     this.cardTemplateSelector = cardTemplateSelector;
   }
 
-  returnCard () {
-    this.cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+  #fillMarkupWithData () {
+    this.cardTemplate = document.querySelector(this.cardTemplateSelector).content.firstElementChild;
     this.cardElement = this.cardTemplate.cloneNode(true);
+    this.cardImage = this.cardElement.querySelector(".card__image");
+    this.cardCaption = this.cardElement.querySelector(".card__caption");
+    this.likeButton = this.cardElement.querySelector(".card__like-button");
+    this.deleteButton = this.cardElement.querySelector(".card__delete");
+    
+    this.cardImage.src = this.link;
+    this.cardImage.alt = this.name;
+    this.cardCaption.textContent = this.name;
+
     return this.cardElement;
+  }
+
+  returnCard () {
+    this.newCard = this.#fillMarkupWithData();
+
+    return this.newCard;
   }
 }
