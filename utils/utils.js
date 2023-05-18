@@ -33,21 +33,6 @@ export function handleImageModalInfo(event, imageModal) {
   imageCaption.textContent = event.target.alt;
 }
 
-export function handleProfileFormSubmit(event) {
-  event.preventDefault();
-
-  const profileEditModal = document.querySelector("#profile-edit-modal");
-  const profileUserName = document.querySelector(".profile__user-name");
-  const profileSubtext = document.querySelector('.profile__subtext');
-  const modalInputUserName = document.querySelector("#modal-input-username");
-  const modalInputSubtext = document.querySelector("#modal-input-subtext");
-  
-  profileUserName.textContent = modalInputUserName.value;
-  profileSubtext.textContent = modalInputSubtext.value;
-  
-  closeModal(profileEditModal);
-}
-
 export function openCardModal() {
   const addCardModal = document.getElementById("add-card-modal");
   openModal(addCardModal);
