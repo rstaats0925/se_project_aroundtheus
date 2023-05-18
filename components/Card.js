@@ -1,4 +1,4 @@
-import * as utils from "../utils/utils.js";
+import {openModal, handleImageModalInfo} from "../utils/utils.js";
 
 export default class Card {
   #newCard;
@@ -37,12 +37,22 @@ export default class Card {
 
   #addDeleteButtonEventListener(card) {
     this.deleteButton = card.querySelector(".card__delete");
-    this.deleteButton.addEventListener("click", utils.deleteCard);
+    this.deleteButton.addEventListener("click", this.#deleteCard);
+  }
+
+  #deleteCard (event) {
+    event.target.closest(".card").remove();
   }
 
   #addImageEventListener (card) {
     this.image = card.querySelector(".card__image");
-    this.image.addEventListener("click", utils.openImageModal);
+    this.image.addEventListener("click", this.#openImageModal);
+  }
+
+  #openImageModal (event) {
+    const imageModal = document.querySelector("#image-modal");
+    openModal(imageModal);
+    handleImageModalInfo(event, imageModal);
   }
 
   #addEventListeners (card) {
