@@ -56,49 +56,18 @@ const imageModalCloseButton = document.getElementById("image-modal-close-button"
 
 
 function addCard(event) {
-  event.preventDefault();
-
-  // const inputList = [...addCardModal.querySelectorAll(".modal__input")];
-  // const submitButton = addCardModal.querySelector(config.submitButtonSelector); 
+  event.preventDefault(); 
+  
   const cardData = {
     name: addCardTitleInput.value,
     link: addCardLinkInput.value
   }
   const newCard = new Card(cardData, "#card-template").returnCard();
+  
   cardsGrid.prepend(newCard);
   addCardModal.querySelector(".modal__form").reset();
-  // toggleButtonState(inputList, submitButton, config); use formValidator class
   utils.closeModal(addCardModal);
 }
-
-//Functions for opening modals
-// function fillProfileForm() {
-//   modalInputUserName.value = profileUserName.textContent;
-//   modalInputSubtext.value = profileSubtext.textContent;
-// }
-
-//Functions for closing modals
-
-// function getCardElement(data) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const cardImage = cardElement.querySelector(".card__image");
-//   const cardCaption = cardElement.querySelector(".card__caption");
-//   const likeButton = cardElement.querySelector(".card__like-button");
-//   const deleteButton = cardElement.querySelector(".card__delete");
-  
-//   cardImage.src = data.link;
-//   cardImage.alt = data.name;
-//   cardCaption.textContent = data.name;
-  
-//   likeButton.addEventListener("click", ()=>{
-//     likeButton.classList.toggle("card__like-button_inactive");
-//   })
-
-//   cardImage.addEventListener("click", openImageModal);
-//   deleteButton.addEventListener("click", deleteCard);
-
-//   return cardElement;
-// }
 
 function handleProfileFormSubmit(event) {
   event.preventDefault();
@@ -142,3 +111,6 @@ const config = {
 
 const profileValidator = new FormValidator(config, "#profile-edit-form");
 profileValidator.enableValidation();
+
+const addCardValidator = new FormValidator(config, "#add-card-modal");
+addCardValidator.enableValidation();

@@ -1,7 +1,3 @@
-// export function deleteCard (event) {
-//   event.target.closest(".card").remove();
-// }
-
 //Functions for handling Modals
 export function openModal (modal) {
   modal.classList.add("modal__open");
@@ -37,12 +33,6 @@ export function openCardModal() {
   const addCardModal = document.getElementById("add-card-modal");
   openModal(addCardModal);
 }
-
-// export function openImageModal(event) {
-//   const imageModal = document.querySelector("#image-modal");
-//   openModal(imageModal);
-//   handleImageModalInfo(event, imageModal);
-// }
 
 export function closeModal(modal) {
   modal.classList.remove("modal__open");
