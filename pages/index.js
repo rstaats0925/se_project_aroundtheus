@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 import * as utils from "../utils/utils.js";
 
 const initialCards = [ 
@@ -128,3 +129,16 @@ imageModalCloseButton.addEventListener("click", utils.closeImageModal);
 
 modalEditForm.addEventListener("submit", handleProfileFormSubmit);
 addCardModal.addEventListener("submit", addCard);
+
+//Form Validation
+const config = { 
+  formSelector: ".modal__form", 
+  inputSelector: ".modal__input", 
+  submitButtonSelector: ".modal__save-button", 
+  inactiveButtonClass: "modal__save-button_disabled", 
+  inputErrorClass: "modal__input-error", 
+  errorClass: "modal__input-error_active" 
+}; 
+
+const profileValidator = new FormValidator(config, "#profile-edit-form");
+profileValidator.enableValidation();
