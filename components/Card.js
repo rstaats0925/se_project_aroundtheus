@@ -1,52 +1,56 @@
-import {openModal, handleImageModalInfo} from "../utils/utils.js";
+import { handleImageModalInfo } from "../pages/index.js";
+import {openModal} from "../utils/utils.js";
 
 export default class Card {
-  #newCard;
+  #card;
+  #likeButton;
+  #cardImage;
+  #cardCaption;
+  #deleteButton;
+  #name;
+  #link;
+  #cardTemplateSelector;
 
   constructor (data, cardTemplateSelector) {
-    this.name = data.name;
-    this.link = data.link;
-    this.cardTemplateSelector = cardTemplateSelector;
-    this.#newCard = this.#returnEmptyClone();
+    this.#name = data.name;
+    this.#link = data.link;
+    this.#cardTemplateSelector = cardTemplateSelector;
+    this.#card = this.#returnEmptyClone();
+    this.#likeButton = this.#card.querySelector(".card__like-button");
+    this.#cardImage = this.#card.querySelector(".card__image");
+    this.#cardCaption = this.#card.querySelector(".card__caption");
+    this.#deleteButton = this.#card.querySelector(".card__delete");
   }
 
   #returnEmptyClone () {
-    this.cardTemplate = document.querySelector(this.cardTemplateSelector).content.firstElementChild;
+    this.cardTemplate = document.querySelector(this.#cardTemplateSelector).content.firstElementChild;
     return this.cardTemplate.cloneNode(true);
   }
 
-  #fillMarkupWithData (card) {
-    this.cardImage = card.querySelector(".card__image");
-    this.cardCaption = card.querySelector(".card__caption");
-    this.likeButton = card.querySelector(".card__like-button");
-    this.deleteButton = card.querySelector(".card__delete");
-    
-    this.cardImage.src = this.link;
-    this.cardImage.alt = this.name;
-    this.cardCaption.textContent = this.name;
+  #fillMarkupWithData () {
+    this.#cardImage.src = this.#link;
+    this.#cardImage.alt = this.#name;
+    this.#cardCaption.textContent = this.#name;
   }
 
-  #addLikeButtonEventListener (card) {
-    this.likeButton = card.querySelector(".card__like-button");
-    this.likeButton.addEventListener("click", this.#toggleLikeButton);
+  #addLikeButtonEventListener () {
+    this.#likeButton.addEventListener("click", this.#toggleLikeButton);
   }
 
   #toggleLikeButton (event) {
     event.target.classList.toggle("card__like-button_inactive");
   }
 
-  #addDeleteButtonEventListener(card) {
-    this.deleteButton = card.querySelector(".card__delete");
-    this.deleteButton.addEventListener("click", this.#deleteCard);
+  #addDeleteButtonEventListener() {
+    this.#deleteButton.addEventListener("click", this.#deleteCard);
   }
 
   #deleteCard (event) {
     event.target.closest(".card").remove();
   }
 
-  #addImageEventListener (card) {
-    this.image = card.querySelector(".card__image");
-    this.image.addEventListener("click", this.#openImageModal);
+  #addImageEventListener () {
+    this.#cardImage.addEventListener("click", this.#openImageModal);
   }
 
   #openImageModal (event) {
@@ -55,16 +59,16 @@ export default class Card {
     handleImageModalInfo(event, imageModal);
   }
 
-  #addEventListeners (card) {
-    this.#addLikeButtonEventListener(card);
-    this.#addDeleteButtonEventListener(card);
-    this.#addImageEventListener(card);
+  #addEventListeners () {
+    this.#addLikeButtonEventListener();
+    this.#addDeleteButtonEventListener();
+    this.#addImageEventListener();
   }
 
   #completeNewCard () {
-    this.#fillMarkupWithData(this.#newCard);
-    this.#addEventListeners(this.#newCard);
-    return this.#newCard;
+    this.#fillMarkupWithData();
+    this.#addEventListeners();
+    return this.#card;
   }
 
   returnCard () {
