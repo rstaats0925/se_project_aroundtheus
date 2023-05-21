@@ -15,11 +15,11 @@ export default class Card {
     this.#name = data.name;
     this.#link = data.link;
     this.#cardTemplateSelector = cardTemplateSelector;
-    this.#card = this.#returnEmptyClone();
-    this.#likeButton = this.#card.querySelector(".card__like-button");
-    this.#cardImage = this.#card.querySelector(".card__image");
-    this.#cardCaption = this.#card.querySelector(".card__caption");
-    this.#deleteButton = this.#card.querySelector(".card__delete");
+    // this.#card = this.#returnEmptyClone();
+    // this.#likeButton = this.#card.querySelector(".card__like-button");
+    // this.#cardImage = this.#card.querySelector(".card__image");
+    // this.#cardCaption = this.#card.querySelector(".card__caption");
+    // this.#deleteButton = this.#card.querySelector(".card__delete");
   }
 
   #returnEmptyClone () {
@@ -66,6 +66,11 @@ export default class Card {
   }
 
   #completeNewCard () {
+    this.#card = this.#returnEmptyClone();
+    this.#likeButton = this.#card.querySelector(".card__like-button");
+    this.#cardImage = this.#card.querySelector(".card__image");
+    this.#cardCaption = this.#card.querySelector(".card__caption");
+    this.#deleteButton = this.#card.querySelector(".card__delete");
     this.#fillMarkupWithData();
     this.#addEventListeners();
     return this.#card;
