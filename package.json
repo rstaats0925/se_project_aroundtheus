@@ -1,0 +1,11 @@
+{
+  "name": "se_project_aroundtheus",
+  "version": "1.0.0",
+  "description": "This is a webpage that uses responsive design to adpapt to varying screen sizes from 320px to 1280px. Going from biggest to smallest screensize the amount of columns start at 3 then reduce down to 2 at around 930px. As the screen compresses the profile will rearrange itself to a vertical orientation instead of a horizontal one. For the mobile screensize the cards will be in a single column.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
