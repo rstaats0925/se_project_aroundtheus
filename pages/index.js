@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 import * as utils from "../utils/utils.js";
 import initialCards from "../utils/constants.js";
 
@@ -12,7 +13,7 @@ const modalInputUserName = document.querySelector("#modal-input-username");
 const profileSubtext = document.querySelector('.profile__subtext');
 const modalInputSubtext = document.querySelector("#modal-input-subtext");
 const modalEditForm = document.getElementById("profile-edit-form");
-const cardsGrid = document.querySelector(".cards__grid");
+// const cardsGrid = document.querySelector(".cards__grid");
 const addCardModal = document.querySelector("#add-card-modal");
 const addButton = document.querySelector("#add-button");
 const modalAddCardCloseButton = document.querySelector("#add-card-close-button");
@@ -84,10 +85,18 @@ function createCard (cardData) {
   return card.returnCard();
 }
 
-//render intial cards onto page
-initialCards.forEach((obj) => {
-  cardsGrid.append(createCard(obj));
-});
+//Render Initial cards onto the page
+
+const gridHandler = new Section({
+  items: initialCards,
+  renderer: (dataObj) => {
+    const card = new Card(dataObj, "#card-template");
+    const cardElement = card.returnCard();
+    gridHandler.addItem(cardElement);
+  }
+}, ".cards__grid");
+
+gridHandler.renderItems();
 
 //eventListeners
 

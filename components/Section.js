@@ -1,20 +1,19 @@
-class Section {
+export default class Section {
   #items;
   #renderer;
-  #cardSelector;
+  #container;
 
-  constructor ({items, renderer}, cardSelector) {
+  constructor ({items, renderer}, containerSelector) {
     this.#items = items;//array of data for rendering cards onto page
     this.#renderer = renderer;//function responsible for creating and rendering data on a page
-    this.#cardSelector = cardSelector;
+    this.#container = document.querySelector(containerSelector);
   }
 
   renderItems() {
-    //renders all elements onto the page
-    this.#items.forEach(this.#renderer);
+    this.#items.forEach(item => this.#renderer(item));
   }
 
-  addItem() {
-    //takes a DOM element & adds it to the page
+  addItem(item) {
+    this.#container.append(item);
   }
 }
