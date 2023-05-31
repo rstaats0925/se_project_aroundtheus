@@ -11,9 +11,9 @@ export default class Card {
   #link;
   #cardTemplateSelector;
 
-  constructor (data, cardTemplateSelector) {
-    this.#name = data.name;
-    this.#link = data.link;
+  constructor ({name, link}, cardTemplateSelector) {
+    this.#name = name;
+    this.#link = link;
     this.#cardTemplateSelector = cardTemplateSelector;
   }
 
