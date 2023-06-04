@@ -5,11 +5,11 @@ export function openModal (modal) {
   document.addEventListener("keydown", closeModalByEscapeKey);
 }
 
-export function closeModal(modal) {
-  modal.classList.remove("modal__open");
-  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
-  document.removeEventListener("keydown", closeModalByEscapeKey);
-}
+// export function closeModal(modal) {
+//   modal.classList.remove("modal__open");
+//   modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+//   document.removeEventListener("keydown", closeModalByEscapeKey);
+// }
 
 export function closeModalOnRemoteClick(event) {
   if (event.target === event.currentTarget) {
