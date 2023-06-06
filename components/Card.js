@@ -1,7 +1,3 @@
-import PopupWithImage from "./PopupWithImage.js";
-
-const popup = new PopupWithImage("#image-modal");
-
 export default class Card {
   #card;
   #likeButton;
@@ -11,11 +7,13 @@ export default class Card {
   #name;
   #link;
   #cardTemplateSelector;
+  #handleCardClick;
 
-  constructor ({name, link}, cardTemplateSelector) {
+  constructor ({name, link}, cardTemplateSelector, handleCardClick) {
     this.#name = name;
     this.#link = link;
     this.#cardTemplateSelector = cardTemplateSelector;
+    this.#handleCardClick = handleCardClick;
   }
 
   #returnEmptyClone () {
@@ -46,8 +44,8 @@ export default class Card {
   }
 
   #addImageEventListener () {
-    this.#cardImage.addEventListener("click",(event) => {
-      popup.open(event);
+    this.#cardImage.addEventListener("click", (event)=>{
+      this.#handleCardClick(event)
     });
   }
 
