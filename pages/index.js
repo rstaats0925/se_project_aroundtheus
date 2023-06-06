@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import * as utils from "../utils/utils.js";
 import initialCards from "../utils/constants.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 //variables
 const profileEditButton = document.querySelector("#profile-edit-btn");
@@ -18,6 +19,7 @@ const addButton = document.querySelector("#add-button");
 const modalAddCardCloseButton = document.querySelector("#add-card-close-button");
 const addCardTitleInput = addCardModal.querySelector("#image-input-title");
 const addCardLinkInput = addCardModal.querySelector("#modal-image-link");
+
 
 
 function addCard(event) {
@@ -79,12 +81,14 @@ function closeCardModal() {
 //   return card.returnCard();
 // }
 
+const imageModalHandler = new PopupWithImage("#image-modal");
+
 //Render Initial cards onto the page
 
 const gridHandler = new Section({
   items: initialCards,
   renderer: (dataObj) => {
-    const card = new Card(dataObj, "#card-template");
+    const card = new Card(dataObj, "#card-template", imageModalHandler.open.bind(imageModalHandler));
     const cardElement = card.returnCard();
     gridHandler.addItem(cardElement);
   }

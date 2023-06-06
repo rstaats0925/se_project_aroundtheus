@@ -1,9 +1,9 @@
 //Functions for handling Modals
-export function openModal (modal) {
-  modal.classList.add("modal__open");
-  modal.addEventListener("mousedown", closeModalOnRemoteClick);
-  document.addEventListener("keydown", closeModalByEscapeKey);
-}
+// export function openModal (modal) {
+//   modal.classList.add("modal__open");
+//   modal.addEventListener("mousedown", closeModalOnRemoteClick);
+//   document.addEventListener("keydown", closeModalByEscapeKey);
+// }
 
 // export function closeModal(modal) {
 //   modal.classList.remove("modal__open");
