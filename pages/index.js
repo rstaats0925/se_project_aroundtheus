@@ -4,19 +4,20 @@ import Section from "../components/Section.js";
 import * as utils from "../utils/utils.js";
 import initialCards from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 
 //variables
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const editProfileModalCloseButton = document.getElementById("profile-modal-close-button");
+// const editProfileModalCloseButton = document.getElementById("profile-modal-close-button");
 const profileUserName = document.querySelector(".profile__user-name");
-const modalInputUserName = document.querySelector("#modal-input-username");
+// const modalInputUserName = document.querySelector("#modal-input-username");
 const profileSubtext = document.querySelector('.profile__subtext');
-const modalInputSubtext = document.querySelector("#modal-input-subtext");
-const modalEditForm = document.getElementById("profile-edit-form");
+// const modalInputSubtext = document.querySelector("#modal-input-subtext");
+// const modalEditForm = document.getElementById("profile-edit-form");
 const addCardModal = document.querySelector("#add-card-modal");
 const addButton = document.querySelector("#add-button");
-const modalAddCardCloseButton = document.querySelector("#add-card-close-button");
+// const modalAddCardCloseButton = document.querySelector("#add-card-close-button");
 const addCardTitleInput = addCardModal.querySelector("#image-input-title");
 const addCardLinkInput = addCardModal.querySelector("#modal-image-link");
 
@@ -46,42 +47,41 @@ function handleProfileFormSubmit(event) {
   utils.closeModal(profileEditModal);
 }
 
-function openProfileModal() {
-  utils.openModal(profileEditModal);
-  fillProfileForm();
-}
+// function openProfileModal() {
+//   utils.openModal(profileEditModal);
+//   fillProfileForm();
+// }
 
 function fillProfileForm() {
   modalInputUserName.value = profileUserName.textContent;
   modalInputSubtext.value = profileSubtext.textContent;
 }
 
-// export function handleImageModalInfo(event, imageModal) {
-//   const imageElement = imageModal.querySelector(".modal__image");
-//   const imageCaption = imageModal.querySelector(".modal__image-caption");
-//   imageElement.src = event.target.src;
-//   imageElement.alt = event.target.alt;
-//   imageCaption.textContent = event.target.alt;
+// function openCardModal() {
+//   utils.openModal(addCardModal);
 // }
 
-function openCardModal() {
-  utils.openModal(addCardModal);
-}
+// function closeProfileModal() {
+//   utils.closeModal(profileEditModal);
+// }
 
-function closeProfileModal() {
-  utils.closeModal(profileEditModal);
-}
-
-function closeCardModal() {
-  utils.closeModal(addCardModal);
-}
+// function closeCardModal() {
+//   utils.closeModal(addCardModal);
+// }
 
 // function createCard (cardData) {
 //   const card = new Card(cardData, "#card-template");
 //   return card.returnCard();
 // }
 
+//modal handlers
+function placeHolder () {
+  console.log("Firing placeHolder()");
+}
+
 const imageModalHandler = new PopupWithImage("#image-modal");
+const profileHandler = new PopupWithForm("#profile-edit-modal", placeHolder);
+const cardModalHandler = new PopupWithForm("#add-card-modal", placeHolder);
 
 //Render Initial cards onto the page
 
@@ -97,17 +97,12 @@ const gridHandler = new Section({
 gridHandler.renderItems();
 
 //eventListeners
-
-profileEditButton.addEventListener("click", openProfileModal);
-editProfileModalCloseButton.addEventListener("click", closeProfileModal);
-
-
-addButton.addEventListener("click", openCardModal);
-modalAddCardCloseButton.addEventListener("click", closeCardModal);
+profileEditButton.addEventListener("click", profileHandler.open.bind(profileHandler));
+addButton.addEventListener("click", cardModalHandler.open.bind(cardModalHandler));
 
 
-modalEditForm.addEventListener("submit", handleProfileFormSubmit);
-addCardModal.addEventListener("submit", addCard);
+// modalEditForm.addEventListener("submit", handleProfileFormSubmit);
+// addCardModal.addEventListener("submit", addCard);
 
 //Form Validation
 const config = { 
