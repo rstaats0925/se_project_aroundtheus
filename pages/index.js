@@ -1,19 +1,14 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import * as utils from "../utils/utils.js";
 import initialCards from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 //Buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
-
-// function createCard (cardData) {
-//   const card = new Card(cardData, "#card-template");
-//   return card.returnCard();
-// }
 
 function addCard (formData) {
   const cardInstance = new Card(formData, "#card-template", imageModalHandler.open.bind(imageModalHandler));
@@ -22,13 +17,19 @@ function addCard (formData) {
   gridHandler.addItem(domCard);
 }
 
+const profileFormInputSelectors = {
+  name: "#profile-input-username",
+  job: "#profile-input-job"
+};
+
+const profileInfo = new UserInfo(profileFormInputSelectors);
+
 //Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
-const profileModalHandler = new PopupWithForm("#profile-edit-modal", placeHolder);
+const profileModalHandler = new PopupWithForm("#profile-edit-modal", profileInfo.setUserInfo.bind(profileInfo));
 const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
 
 //Render Initial cards onto the page
-
 const gridHandler = new Section({
   items: initialCards,
   renderer: (dataObj) => {
@@ -39,11 +40,6 @@ const gridHandler = new Section({
 }, ".cards__grid");
 
 gridHandler.renderItems();
-
-//modal handlers
-function placeHolder () {
-  console.log("Firing placeHolder()");
-}
 
 //eventListeners
 profileEditButton.addEventListener("click", profileModalHandler.open.bind(profileModalHandler));
