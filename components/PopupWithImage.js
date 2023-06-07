@@ -6,6 +6,7 @@ export default class PopupWithImage extends Popup {
 
   constructor(popupSelector) {
     super(popupSelector);
+    super.setEventListeners();
     this.#image = this.modalElement.querySelector(".modal__image");
     this.#caption = this.modalElement.querySelector(".modal__image-caption");
   }
