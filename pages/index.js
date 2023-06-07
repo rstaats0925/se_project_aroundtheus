@@ -10,8 +10,9 @@ import UserInfo from "../components/UserInfo.js";
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
 
-function addCard (formData) {
-  const cardInstance = new Card(formData, "#card-template", imageModalHandler.open.bind(imageModalHandler));
+//submit function for addCard Form
+function addCard () {
+  const cardInstance = new Card(this.getInputValues(), "#card-template", imageModalHandler.open.bind(imageModalHandler));
   const domCard = cardInstance.returnCard();
 
   gridHandler.addItem(domCard);
