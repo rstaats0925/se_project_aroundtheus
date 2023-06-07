@@ -1,15 +1,13 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import * as utils from "../utils/utils.js";
-import initialCards from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import initialCards from "../utils/constants.js";
 
-//variables
+//buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
-const profileUserName = document.querySelector(".profile__user-name");
-const profileSubtext = document.querySelector('.profile__subtext');
 const addButton = document.querySelector("#add-button");
 
 // function addCard(event) {
@@ -27,32 +25,32 @@ const addButton = document.querySelector("#add-button");
 //   addCardValidator.disableButtonState();
 // }
 
-function handleProfileFormSubmit(event) {
-  event.preventDefault();
-  
-  profileUserName.textContent = modalInputUserName.value;
-  profileSubtext.textContent = modalInputSubtext.value;
-
-  utils.closeModal(profileEditModal);
-}
-
-function fillProfileForm() {
-  modalInputUserName.value = profileUserName.textContent;
-  modalInputSubtext.value = profileSubtext.textContent;
-}
-
 // function createCard (cardData) {
 //   const card = new Card(cardData, "#card-template");
 //   return card.returnCard();
 // }
 
-//modal handlers
 function placeHolder () {
   console.log("Firing placeHolder()");
 }
 
+const profileFormInputSelectors = {
+  name: "#profile-input-username",
+  job: "#profile-input-job"
+};
+
+const cardFormInputSelectors = {
+  title: "#image-input-title",
+  link: "#image-input-link"
+}
+
+//Form Handlers
+const userInfo = new UserInfo(profileFormInputSelectors);
+const cardInfo = new UserInfo(cardFormInputSelectors);
+
+//Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
-const profileModalHandler = new PopupWithForm("#profile-edit-modal", placeHolder);
+const profileModalHandler = new PopupWithForm("#profile-edit-modal", userInfo.setUserInfo.bind(userInfo));
 const cardModalHandler = new PopupWithForm("#add-card-modal", placeHolder);
 
 //Render Initial cards onto the page

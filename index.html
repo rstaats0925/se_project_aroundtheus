@@ -30,7 +30,7 @@
               id="profile-edit-btn"
               type="button"
             ></button>
-            <p class="profile__subtext">Explorer</p>
+            <p class="profile__job">Explorer</p>
           </div>
           <button
             class="profile__add-button"
@@ -57,7 +57,7 @@
         <form class="modal__form" id="profile-edit-form" novalidate>
           <input
             class="modal__input"
-            id="modal-input-username"
+            id="profile-input-username"
             type="text"
             name="user-name"
             placeholder="name"
@@ -65,10 +65,10 @@
             maxlength="40"
             required
           />
-          <span class="input-error" id="modal-input-username-error"></span>
+          <span class="input-error" id="profile-input-username-error"></span>
           <input
             class="modal__input"
-            id="modal-input-subtext"
+            id="profile-input-job"
             type="text"
             name="subtext"
             placeholder="job"
@@ -76,7 +76,7 @@
             maxlength="200"
             required
           />
-          <span class="input-error" id="modal-input-subtext-error"></span>
+          <span class="input-error" id="profile-input-job-error"></span>
           <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
@@ -100,10 +100,10 @@
           <span class="input-error" id="image-input-title-error"></span>
           <input
             class="modal__input"
-            id="modal-image-link"
+            id="image-input-link"
             type="url"
             name="image-link"
-            placeholder="image link"
+            placeholder="link"
             required
           />
           <span class="input-error" id="modal-image-link-error"></span>

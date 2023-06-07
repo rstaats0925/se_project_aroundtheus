@@ -4,13 +4,13 @@ export default class Card {
   #cardImage;
   #cardCaption;
   #deleteButton;
-  #name;
+  #title;
   #link;
   #cardTemplateSelector;
   #handleCardClick;
 
-  constructor ({name, link}, cardTemplateSelector, handleCardClick) {
-    this.#name = name;
+  constructor ({title, link}, cardTemplateSelector, handleCardClick) {
+    this.#title = title;
     this.#link = link;
     this.#cardTemplateSelector = cardTemplateSelector;
     this.#handleCardClick = handleCardClick;
@@ -23,8 +23,8 @@ export default class Card {
 
   #fillMarkupWithData () {
     this.#cardImage.src = this.#link;
-    this.#cardImage.alt = this.#name;
-    this.#cardCaption.textContent = this.#name;
+    this.#cardImage.alt = this.#title;
+    this.#cardCaption.textContent = this.#title;
   }
 
   #addLikeButtonEventListener () {
