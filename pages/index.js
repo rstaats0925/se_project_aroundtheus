@@ -15,14 +15,17 @@ const addButton = document.querySelector("#add-button");
 //   return card.returnCard();
 // }
 
-//modal handlers
-function placeHolder () {
-  console.log("Firing placeHolder()");
+function addCard (formData) {
+  const cardInstance = new Card(formData, "#card-template", imageModalHandler.open.bind(imageModalHandler));
+  const domCard = cardInstance.returnCard();
+
+  gridHandler.addItem(domCard);
 }
 
+//Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
 const profileModalHandler = new PopupWithForm("#profile-edit-modal", placeHolder);
-const cardModalHandler = new PopupWithForm("#add-card-modal", placeHolder);
+const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
 
 //Render Initial cards onto the page
 
@@ -36,6 +39,11 @@ const gridHandler = new Section({
 }, ".cards__grid");
 
 gridHandler.renderItems();
+
+//modal handlers
+function placeHolder () {
+  console.log("Firing placeHolder()");
+}
 
 //eventListeners
 profileEditButton.addEventListener("click", profileModalHandler.open.bind(profileModalHandler));
@@ -54,5 +62,5 @@ const config = {
 const profileValidator = new FormValidator(config, "#profile-edit-form");
 profileValidator.enableValidation();
 
-const addCardValidator = new FormValidator(config, "#add-card-modal");
+const addCardValidator = new FormValidator(config, "#add-card-form");
 addCardValidator.enableValidation();
