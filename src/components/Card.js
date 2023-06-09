@@ -9,8 +9,8 @@ export default class Card {
   #cardTemplateSelector;
   #handleCardClick;
 
-  constructor ({title, link}, cardTemplateSelector, handleCardClick) {
-    this.#title = title;
+  constructor ({name, link}, cardTemplateSelector, handleCardClick) {
+    this.#title = name;
     this.#link = link;
     this.#cardTemplateSelector = cardTemplateSelector;
     this.#handleCardClick = handleCardClick;

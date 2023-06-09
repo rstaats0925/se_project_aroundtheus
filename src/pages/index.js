@@ -11,41 +11,48 @@ import UserInfo from "../components/UserInfo.js";
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
 
-//submit function for addCard Form
 function addCard (cardDataObj) {
-  const cardInstance = new Card(cardDataObj, "#card-template", imageModalHandler.open.bind(imageModalHandler));
+  const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
+    imageModalHandler.open(event);
+  });
+  
   const domCard = cardInstance.returnCard();
 
   gridHandler.addItem(domCard);
 }
 
-const profileFormInputSelectors = {
-  name: "#profile-input-username",
-  job: "#profile-input-job"
-};
+const profileInfoSelectors = {
+  nameSelector: ".profile__user-name",
+  jobSelector: ".profile__job"
+}
 
-const profileInfo = new UserInfo(profileFormInputSelectors);
+const profileInfo = new UserInfo(profileInfoSelectors);
 
 //Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
-const profileModalHandler = new PopupWithForm("#profile-edit-modal", profileInfo.setUserInfo.bind(profileInfo));
+
+const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
+  profileInfo.setUserInfo(data)
+});
+
 const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
 
 //Render Initial cards onto the page
 const gridHandler = new Section({
   items: initialCards,
-  renderer: (dataObj) => {
-    const card = new Card(dataObj, "#card-template", imageModalHandler.open.bind(imageModalHandler));
-    const cardElement = card.returnCard();
-    gridHandler.addItem(cardElement);
-  }
+  renderer: addCard
 }, ".cards__grid");
 
 gridHandler.renderItems();
 
 //eventListeners
-profileEditButton.addEventListener("click", profileModalHandler.open.bind(profileModalHandler));
-addButton.addEventListener("click", cardModalHandler.open.bind(cardModalHandler));
+profileEditButton.addEventListener("click", (event) => {
+  profileModalHandler.open(event);
+});
+
+addButton.addEventListener("click", (event) => {
+  cardModalHandler.open(event);
+});
 
 //Form Validation
 const config = { 

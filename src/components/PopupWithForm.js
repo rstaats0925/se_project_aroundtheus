@@ -22,24 +22,17 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    this.closeButton.addEventListener("click", () => {
-      this.close();
-    });
-
-    this.modalElement.addEventListener("mousedown", (event) => {
-      this.closeModalOnRemoteClick(event);
-    })
+    super.setEventListeners();
     
     this.#form.addEventListener("submit", (event) => {
       event.preventDefault();
       this.#submitHandler(this.#getInputValues());
-      console.log(this.#submitHandler);
       this.close();
     });
   }
 
   close() {
     this.#form.reset();
-    this.modalElement.classList.remove("modal__open");
+    super.close();
   }
 }
