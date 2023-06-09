@@ -56,8 +56,6 @@ export default class formValidator {
         this.#toggleButtonState();
       })
     })
-
-    this.#toggleButtonState();
   }
 
   disableButtonState () {

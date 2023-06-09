@@ -45,15 +45,6 @@ const gridHandler = new Section({
 
 gridHandler.renderItems();
 
-//eventListeners
-profileEditButton.addEventListener("click", (event) => {
-  profileModalHandler.open(event);
-});
-
-addButton.addEventListener("click", (event) => {
-  cardModalHandler.open(event);
-});
-
 //Form Validation
 const config = { 
   formSelector: ".modal__form", 
@@ -69,3 +60,14 @@ profileValidator.enableValidation();
 
 const addCardValidator = new FormValidator(config, "#add-card-form");
 addCardValidator.enableValidation();
+
+//eventListeners
+profileEditButton.addEventListener("click", (event) => {
+  profileValidator.disableButtonState();
+  profileModalHandler.open(event);
+});
+
+addButton.addEventListener("click", (event) => {
+  addCardValidator.disableButtonState();
+  cardModalHandler.open(event);
+});
