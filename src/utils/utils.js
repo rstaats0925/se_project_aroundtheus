@@ -18,8 +18,8 @@ export function closeModalOnRemoteClick(event) {
 }
 
 export function closeModalByEscapeKey(event) {
+  console.log("fire");
   if (event.key === "Escape") {
-    const openedModal = document.querySelector(".modal__open");
-    closeModal(openedModal);
+    this.close();
   }
 }

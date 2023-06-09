@@ -1,7 +1,10 @@
 export default class Popup {
+  #handleEscClose;
+
   constructor (popupSelector) {
     this.modalElement = document.querySelector(popupSelector);
     this.closeButton = this.modalElement.querySelector(".modal__close-button");
+    this.#handleEscClose = this.#handleEscapeClose.bind(this);
   }
 
   open() {
@@ -14,26 +17,24 @@ export default class Popup {
     this.#removeHandleEscClose();
   }
 
-  closeModalOnRemoteClick(event) {
+  #closeModalOnRemoteClick(event) {
     if (event.target === event.currentTarget) {
       this.close();
     }
   }
 
-  #handleEscClose(event) {
+  #handleEscapeClose(event) {
     if (event.key === "Escape") {
-      this.close(this);
+      this.close();
     }
   }
 
   #setHandleEscClose() {
-    document.addEventListener("keydown", (event) => {
-      this.#handleEscClose(event);
-    });
+    document.addEventListener("keydown", this.#handleEscClose);
   }
 
   #removeHandleEscClose() {
-    
+    document.removeEventListener("keydown", this.#handleEscClose);
   }
 
   setEventListeners() {
@@ -42,7 +43,7 @@ export default class Popup {
     });
     
     this.modalElement.addEventListener("mousedown", (event) => {
-      this.closeModalOnRemoteClick(event);
+      this.#closeModalOnRemoteClick(event);
     });
   }
 }
