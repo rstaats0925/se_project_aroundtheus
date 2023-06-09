@@ -30,10 +30,12 @@ const profileInfo = new UserInfo(profileInfoSelectors);
 
 //Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
+imageModalHandler.setEventListeners();
 
 const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
   profileInfo.setUserInfo(data)
 });
+profileModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
 
