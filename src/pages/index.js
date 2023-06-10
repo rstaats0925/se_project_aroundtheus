@@ -38,6 +38,7 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 profileModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
+cardModalHandler.setEventListeners();
 
 //Render Initial cards onto the page
 const gridHandler = new Section({
