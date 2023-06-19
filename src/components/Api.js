@@ -1,18 +1,25 @@
-//https://around.nomoreparties.co/vi/{group-id}
-
 export default class Api {
   constructor(options) {
     this.options = options;
   }
 
   getUserInfo () {
-    return fetch("https://around.nomoreparties.co/v1/groupId/users/me", {
-      authorization: ""
+    return fetch("https://around.nomoreparties.co/v1/group-12/users/me", {
+      headers: {
+        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4"
+      }
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return Promise.reject(`Error: ${response.status}`);
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
-  getInitialCards() {
-
-  }
+  getInitialCards() {}
 }

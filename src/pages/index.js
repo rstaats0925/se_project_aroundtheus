@@ -6,6 +6,7 @@ import initialCards from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 
 //Buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
@@ -23,10 +24,13 @@ function addCard (cardDataObj) {
 
 const profileInfoSelectors = {
   nameSelector: ".profile__user-name",
-  jobSelector: ".profile__job"
+  aboutSelector: ".profile__about",
+  avatarSelector: ".avatar"
 }
 
+const api = new Api({authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4"});
 const profileInfo = new UserInfo(profileInfoSelectors);
+profileInfo.setUserInfo(api.getUserInfo());
 
 //Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
