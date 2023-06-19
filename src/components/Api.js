@@ -16,6 +16,9 @@ export default class Api {
 
       return Promise.reject(`Error: ${response.status}`);
     })
+    .then(json => {
+      callback(json);
+    })
     .catch(err => {
       console.error(err);
     })

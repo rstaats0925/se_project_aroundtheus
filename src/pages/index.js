@@ -29,8 +29,8 @@ const profileInfoSelectors = {
 }
 
 const api = new Api({authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4"});
+
 const profileInfo = new UserInfo(profileInfoSelectors);
-profileInfo.setUserInfo(api.getUserInfo());
 
 //Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
