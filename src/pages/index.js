@@ -28,9 +28,15 @@ const profileInfoSelectors = {
   avatarSelector: ".avatar"
 }
 
-const api = new Api({authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4"});
+const api = new Api({
+  headers: {
+    authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
+    "Content-Type": "application/json"
+  }
+});
 
 const profileInfo = new UserInfo(profileInfoSelectors);
+
 api.getUserInfo().then(json => {
   profileInfo.setUserInfo(json);
 });
