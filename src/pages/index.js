@@ -2,7 +2,6 @@ import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import initialCards from "../utils/constants.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
@@ -12,6 +11,7 @@ import Api from "../components/Api.js";
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
 
+//used to render initial cards
 function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
     imageModalHandler.open(event);
@@ -19,13 +19,7 @@ function addCard (cardDataObj) {
   
   const domCard = cardInstance.returnCard();
 
-  gridHandler.addItem(domCard);
-}
-
-const profileInfoSelectors = {
-  nameSelector: ".profile__user-name",
-  aboutSelector: ".profile__about",
-  avatarSelector: ".avatar"
+  this.addItem(domCard);
 }
 
 const api = new Api({
@@ -35,11 +29,24 @@ const api = new Api({
   }
 });
 
-const profileInfo = new UserInfo(profileInfoSelectors);
-
-api.getUserInfo().then(json => {
-  profileInfo.setUserInfo(json);
+const profileInfo = new UserInfo({
+  nameSelector: ".profile__user-name",
+  aboutSelector: ".profile__about",
+  avatarSelector: ".avatar"
 });
+
+api.getUserAndCardInfo().then(
+  promises => {
+    profileInfo.setUserInfo(promises[0]);
+
+    const gridHandler = new Section({
+      items: promises[1],
+      renderer: addCard
+    }, ".cards__grid");
+
+    gridHandler.renderItems();
+  });
+
 
 //Modal Handlers
 const imageModalHandler = new PopupWithImage("#image-modal");
@@ -52,14 +59,6 @@ profileModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
 cardModalHandler.setEventListeners();
-
-//Render Initial cards onto the page
-const gridHandler = new Section({
-  items: initialCards,
-  renderer: addCard
-}, ".cards__grid");
-
-gridHandler.renderItems();
 
 //Form Validation
 const config = { 
