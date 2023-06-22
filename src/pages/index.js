@@ -22,12 +22,7 @@ function addCard (cardDataObj) {
   this.addItem(domCard);
 }
 
-const api = new Api({
-  headers: {
-    authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-    "Content-Type": "application/json"
-  }
-});
+const api = new Api();
 
 const profileInfo = new UserInfo({
   nameSelector: ".profile__user-name",
