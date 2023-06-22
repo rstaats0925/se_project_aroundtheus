@@ -12,7 +12,7 @@ export default class UserInfo {
   getUserInfo() {
     return {
       name: this.#profileUsername.textContent,
-      job: this.#profileAbout.textContent
+      about: this.#profileAbout.textContent
     }
   }
 

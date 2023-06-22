@@ -48,7 +48,10 @@ const imageModalHandler = new PopupWithImage("#image-modal");
 imageModalHandler.setEventListeners();
 
 const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
-  profileInfo.setUserInfo(data)
+  api.updateProfileInfo(data).then((res) => {
+    profileInfo.setUserInfo(res)
+
+  })
 });
 profileModalHandler.setEventListeners();
 
