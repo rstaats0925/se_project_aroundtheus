@@ -55,7 +55,20 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 });
 profileModalHandler.setEventListeners();
 
-const cardModalHandler = new PopupWithForm("#add-card-modal", addCard);
+const cardModalHandler = new PopupWithForm("#add-card-modal", (data) => {
+  api.addCard(data).then(response => {
+    const section = new Section({
+      items: [response],
+      renderer: addCard
+    }, ".cards__grid")
+
+    const domCard = new Card(response, "#card-template", (event) => {
+      imageModalHandler.open(event);
+    })
+    
+    section.addItem(domCard.returnCard());
+  })
+});
 cardModalHandler.setEventListeners();
 
 //Form Validation
