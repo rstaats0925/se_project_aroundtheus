@@ -6,11 +6,14 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-import PopupDeleteCard from "../components/PopupDeleteCard";
+import PopupDeleteCard from "../components/PopupDeleteCard.js";
 
 //Buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
+
+const deleteModalHandler = new PopupDeleteCard("#delete-card-modal");
+
 
 //used to render initial cards
 function addCard (cardDataObj) {
@@ -36,7 +39,6 @@ function addCard (cardDataObj) {
 }
 
 const api = new Api();
-const deleteModalHandler = new PopupCardDelete
 
 const profileInfo = new UserInfo({
   nameSelector: ".profile__user-name",

@@ -1,6 +1,6 @@
-import Card from "./Card";
+import Popup from "./Popup.js"
 
-export default class PopupDeleteCard extends Card {
+export default class PopupDeleteCard extends Popup {
   constructor (popupSelector) {
     super(popupSelector);
   }
