@@ -13,7 +13,7 @@ const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
 
 const deleteModalHandler = new PopupDeleteCard("#delete-card-modal");
-
+deleteModalHandler.setEventListeners();
 
 //used to render initial cards
 function addCard (cardDataObj) {
