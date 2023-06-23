@@ -12,8 +12,36 @@ import PopupDeleteCard from "../components/PopupDeleteCard.js";
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
 
+//modalHandlers
 const deleteModalHandler = new PopupDeleteCard("#delete-card-modal");
 deleteModalHandler.setEventListeners();
+
+const imageModalHandler = new PopupWithImage("#image-modal");
+imageModalHandler.setEventListeners();
+
+const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
+  api.updateProfileInfo(data).then((res) => {
+    profileInfo.setUserInfo(res)
+
+  })
+});
+profileModalHandler.setEventListeners();
+
+const cardModalHandler = new PopupWithForm("#add-card-modal", (data) => {
+  api.addCard(data).then(response => {
+    const section = new Section({
+      items: [response],
+      renderer: addCard
+    }, ".cards__grid")
+
+    const domCard = new Card(response, "#card-template", (event) => {
+      imageModalHandler.open(event);
+    })
+    
+    section.addItem(domCard.returnCard());
+  })
+});
+cardModalHandler.setEventListeners();
 
 //used to render initial cards
 function addCard (cardDataObj) {
@@ -57,35 +85,6 @@ api.getUserAndCardInfo().then(
 
     gridHandler.renderItems();
   });
-
-
-//Modal Handlers
-const imageModalHandler = new PopupWithImage("#image-modal");
-imageModalHandler.setEventListeners();
-
-const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
-  api.updateProfileInfo(data).then((res) => {
-    profileInfo.setUserInfo(res)
-
-  })
-});
-profileModalHandler.setEventListeners();
-
-const cardModalHandler = new PopupWithForm("#add-card-modal", (data) => {
-  api.addCard(data).then(response => {
-    const section = new Section({
-      items: [response],
-      renderer: addCard
-    }, ".cards__grid")
-
-    const domCard = new Card(response, "#card-template", (event) => {
-      imageModalHandler.open(event);
-    })
-    
-    section.addItem(domCard.returnCard());
-  })
-});
-cardModalHandler.setEventListeners();
 
 //Form Validation
 const config = { 

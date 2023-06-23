@@ -7,15 +7,17 @@ export default class Card {
   #title;
   #link;
   #cardTemplateSelector;
-  #handleCardClick;
+  #handleImageClick;
+  #deleteButtonHandler;
   #owner;
 
-  constructor ({name, link, owner}, cardTemplateSelector, handleCardClick) {
+  constructor ({name, link, owner}, cardTemplateSelector, handleImageClick, deleteButtonHandler) {
     this.#title = name;
     this.#link = link;
     this.#owner = owner;
     this.#cardTemplateSelector = cardTemplateSelector;
-    this.#handleCardClick = handleCardClick;
+    this.#handleImageClick = handleImageClick;
+    this.#deleteButtonHandler = deleteButtonHandler;
   }
 
   #returnEmptyClone () {
@@ -38,7 +40,9 @@ export default class Card {
   }
 
   #addDeleteButtonEventListener() {
-    this.#deleteButton.addEventListener("click", () => this.#deleteCard(this));
+    this.#deleteButton.addEventListener("click", (event) => {
+      this.#deleteButtonHandler(event);
+    });
   }
 
   #deleteCard (event) {
@@ -47,7 +51,7 @@ export default class Card {
 
   #addImageEventListener () {
     this.#cardImage.addEventListener("click", (event)=>{
-      this.#handleCardClick(event)
+      this.#handleImageClick(event)
     });
   }
 
