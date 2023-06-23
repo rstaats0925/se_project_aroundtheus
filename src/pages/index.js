@@ -15,6 +15,18 @@ const addButton = document.querySelector("#add-button");
 function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
     imageModalHandler.open(event);
+  }, (data) => {
+    // interactions between delete popup and card
+    // 1. open delete popup
+    // 2. set the submit action
+    deletePopup.open();
+    deletePopup.setSubmitAction(() => { 
+      // call the api
+      // delete the card
+      // inside delete popup
+        // this._submitAction = action
+    })
+
   });
   
   const domCard = cardInstance.returnCard();

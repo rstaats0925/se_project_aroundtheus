@@ -8,10 +8,12 @@ export default class Card {
   #link;
   #cardTemplateSelector;
   #handleCardClick;
+  #owner;
 
-  constructor ({name, link}, cardTemplateSelector, handleCardClick) {
+  constructor ({name, link, owner}, cardTemplateSelector, handleCardClick) {
     this.#title = name;
     this.#link = link;
+    this.#owner = owner;
     this.#cardTemplateSelector = cardTemplateSelector;
     this.#handleCardClick = handleCardClick;
   }
@@ -36,7 +38,7 @@ export default class Card {
   }
 
   #addDeleteButtonEventListener() {
-    this.#deleteButton.addEventListener("click", this.#deleteCard);
+    this.#deleteButton.addEventListener("click", () => this.#deleteCard(this));
   }
 
   #deleteCard (event) {
@@ -63,6 +65,11 @@ export default class Card {
     this.#deleteButton = this.#card.querySelector(".card__delete");
     this.#fillMarkupWithData();
     this.#addEventListeners();
+
+    if (this.#owner._id != "da6f0aaa844471b7fec4eea5") {
+      this.#deleteButton.hidden = true;
+    }
+    
     return this.#card;
   }
 
