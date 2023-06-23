@@ -84,4 +84,9 @@ export default class Api {
       console.error(err);
     })
   }
+
+  deleteCard({_id}) {
+    // return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${cardId}`, {})
+    console.log(_id);
+  }
 }

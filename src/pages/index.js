@@ -22,7 +22,6 @@ imageModalHandler.setEventListeners();
 const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
   api.updateProfileInfo(data).then((res) => {
     profileInfo.setUserInfo(res)
-
   })
 });
 profileModalHandler.setEventListeners();
@@ -43,6 +42,9 @@ const cardModalHandler = new PopupWithForm("#add-card-modal", (data) => {
 });
 cardModalHandler.setEventListeners();
 
+//api for handling http requests
+const api = new Api();
+
 //used to render initial cards
 function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
@@ -50,23 +52,21 @@ function addCard (cardDataObj) {
   }, (data) => {
     // interactions between delete popup and card
     // 1. open delete popup
+    deleteModalHandler.open();
     // 2. set the submit action
-    PopupDeleteCard.open();
-    PopupDeleteCard.setSubmitAction(() => { 
+    deleteModalHandler.setSubmitAction(() => { 
       // call the api
+      api.deleteCard(cardDataObj);
       // delete the card
       // inside delete popup
         // this._submitAction = action
     })
-
   });
   
   const domCard = cardInstance.returnCard();
 
   this.addItem(domCard);
 }
-
-const api = new Api();
 
 const profileInfo = new UserInfo({
   nameSelector: ".profile__user-name",
