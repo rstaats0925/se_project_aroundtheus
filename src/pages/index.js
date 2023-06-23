@@ -6,6 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import PopupDeleteCard from "../components/PopupDeleteCard";
 
 //Buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
@@ -19,8 +20,8 @@ function addCard (cardDataObj) {
     // interactions between delete popup and card
     // 1. open delete popup
     // 2. set the submit action
-    deletePopup.open();
-    deletePopup.setSubmitAction(() => { 
+    PopupDeleteCard.open();
+    PopupDeleteCard.setSubmitAction(() => { 
       // call the api
       // delete the card
       // inside delete popup
@@ -35,6 +36,7 @@ function addCard (cardDataObj) {
 }
 
 const api = new Api();
+const deleteModalHandler = new PopupCardDelete
 
 const profileInfo = new UserInfo({
   nameSelector: ".profile__user-name",
