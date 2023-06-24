@@ -9,9 +9,10 @@ export default class Card {
   #cardTemplateSelector;
   #handleImageClick;
   #deleteButtonHandler;
+  #likeButtonHandler;
   #owner;
 
-  constructor ({name, link, owner, _id}, cardTemplateSelector, handleImageClick, deleteButtonHandler) {
+  constructor ({name, link, owner, _id}, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
     this.#title = name;
     this.#link = link;
     this.#owner = owner;
@@ -19,6 +20,7 @@ export default class Card {
     this.#cardTemplateSelector = cardTemplateSelector;
     this.#handleImageClick = handleImageClick;
     this.#deleteButtonHandler = deleteButtonHandler;
+    this.#likeButtonHandler = likeButtonHandler;
   }
 
   #returnEmptyClone () {
@@ -33,10 +35,12 @@ export default class Card {
   }
 
   #addLikeButtonEventListener () {
-    this.#likeButton.addEventListener("click", this.#toggleLikeButton);
+    this.#likeButton.addEventListener("click", (event) => {
+      this.#likeButtonHandler(this, event);
+    });
   }
 
-  #toggleLikeButton (event) {
+  toggleLikeButton (event) {
     event.target.classList.toggle("card__like-button_inactive");
   }
 

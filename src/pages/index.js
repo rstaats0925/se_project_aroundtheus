@@ -53,14 +53,20 @@ const api = new Api();
 
 //used to render initial cards
 function addCard (cardDataObj) {
-  const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
+  const cardInstance = new Card(cardDataObj, "#card-template",
+  (event) => {
     imageModalHandler.open(event);
-  }, (data, event) => {
+  },
+  (data, event) => {
     deleteModalHandler.open();
     deleteModalHandler.setSubmitAction(() => {
       api.removeCard(data);
       cardInstance.deleteCard(event);
     })
+  },
+  (data, event) => {
+    api.addLike(data);
+    cardInstance.toggleLikeButton(event);
   })
   
   const domCard = cardInstance.returnCard();
