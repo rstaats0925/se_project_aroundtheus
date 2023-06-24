@@ -52,7 +52,7 @@ function addCard (cardDataObj) {
   }, (data) => {
     deleteModalHandler.open();
     deleteModalHandler.setSubmitAction(() => {
-      api.removeCard(data);
+      deleteCard(data);
     })
   });
   
