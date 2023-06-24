@@ -50,7 +50,10 @@ function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
     imageModalHandler.open(event);
   }, (data) => {
-    deleteCard(data);
+    deleteModalHandler.open();
+    deleteModalHandler.setSubmitAction(() => {
+      api.removeCard(data);
+    })
   });
   
   const domCard = cardInstance.returnCard();

@@ -1,8 +1,6 @@
 import Popup from "./Popup.js"
 
 export default class PopupDeleteCard extends Popup {
-    
-
   constructor (popupSelector, submitHandler) {
     super(popupSelector);
     this.submitHandler = submitHandler;
@@ -12,6 +10,7 @@ export default class PopupDeleteCard extends Popup {
   setSubmitAction(callback) {
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
+      callback();
       this.close();
     });
   }
