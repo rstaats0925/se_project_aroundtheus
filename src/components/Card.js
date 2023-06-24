@@ -42,7 +42,7 @@ export default class Card {
 
   #addDeleteButtonEventListener() {
     this.#deleteButton.addEventListener("click", () => {
-      this.#deleteButtonHandler();
+      this.#deleteButtonHandler(this);
     });
   }
 
@@ -74,7 +74,8 @@ export default class Card {
     if (this.#owner._id != "da6f0aaa844471b7fec4eea5") {
       this.#deleteButton.hidden = true;
     }
-    
+    this.#deleteButton._id
+
     return this.#card;
   }
 

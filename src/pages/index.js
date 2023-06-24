@@ -50,22 +50,16 @@ function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
     imageModalHandler.open(event);
   }, (data) => {
-    // interactions between delete popup and card
-    // 1. open delete popup
-    deleteModalHandler.open();
-    // 2. set the submit action
-    deleteModalHandler.setSubmitAction(() => { 
-      // call the api
-      api.deleteCard(cardDataObj);
-      // delete the card
-      // inside delete popup
-        // this._submitAction = action
-    })
+    deleteCard(data);
   });
   
   const domCard = cardInstance.returnCard();
 
   this.addItem(domCard);
+}
+
+function deleteCard (data) {
+  api.removeCard(data);
 }
 
 const profileInfo = new UserInfo({
