@@ -92,16 +92,6 @@ export default class Api {
         authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
         "Content-Type": "application/json"
       }
-    })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Error: ${response.status}`)
-      }
-
-      return response.json();
-    })
-    .catch(err => {
-      console.error(err);
     })    
   }
 }

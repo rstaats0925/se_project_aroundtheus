@@ -35,6 +35,8 @@ const cardModalHandler = new PopupWithForm("#add-card-modal", (data) => {
 
     const domCard = new Card(response, "#card-template", (event) => {
       imageModalHandler.open(event);
+    }, () => {
+      deleteModalHandler.open();
     })
     
     section.addItem(domCard.returnCard());
@@ -49,8 +51,9 @@ const api = new Api();
 function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
     imageModalHandler.open(event);
-  }, () => {
+  }, (data, event) => {
     deleteModalHandler.open();
+    deleteCard(data, event);
   })
   
   const domCard = cardInstance.returnCard();
@@ -58,8 +61,14 @@ function addCard (cardDataObj) {
   this.addItem(domCard);
 }
 
-function deleteCard (data) {
-  api.removeCard(data);
+function deleteCard (data, event) {
+  deleteModalHandler.setSubmitAction(() => {
+    api.removeCard(data).then(response => {
+      if (response.ok) {
+        cardInstance.deleteCard(event);
+      }
+    })
+  })
 }
 
 const profileInfo = new UserInfo({
