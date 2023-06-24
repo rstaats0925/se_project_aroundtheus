@@ -32,6 +32,10 @@
   overflow: hidden;
 }
 
+.card__like-info {
+  text-align: center;
+}
+
 .card__like-button {
   border: none;
   box-sizing: border-box;
