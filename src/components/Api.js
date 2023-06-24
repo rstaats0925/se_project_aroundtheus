@@ -86,7 +86,7 @@ export default class Api {
   }
 
   removeCard(data) {
-    return fetch(`https://around.nomoreparties.co/v1/group/cards/${data._id}`, {
+    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/${data._id}`, {
       method: "DELETE",
       headers: {
         authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
@@ -96,7 +96,7 @@ export default class Api {
   }
 
   addLike(data) {
-    return fetch(`https://around.nomoreparties.co/v1/groupId/cards/likes/${data._id}`, {
+    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${data._id}`, {
       method: "PUT",
       headers: {
         authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
@@ -110,8 +110,25 @@ export default class Api {
 
       return response.json();
     })
-    .then(json => {
-      console.log(json);
+    .catch(err => {
+      console.error(err);
+    })
+  }
+
+  removeLike (data) {
+    return fetch(`https://around.nomoreparties.co/v1/group-12/cards/likes/${data._id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+
+      return response.json();
     })
     .catch(err => {
       console.error(err);

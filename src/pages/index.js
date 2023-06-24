@@ -65,8 +65,15 @@ function addCard (cardDataObj) {
     })
   },
   (data, event) => {
-    api.addLike(data);
-    cardInstance.toggleLikeButton(event);
+    if (!cardInstance.liked) {
+      api.addLike(data);
+      cardInstance.toggleLikeButton(event);
+      cardInstance.liked = !cardInstance.liked;
+    } else {
+        api.removeLike(data);
+        cardInstance.toggleLikeButton(event);
+        cardInstance.liked = !cardInstance.liked;
+    }
   })
   
   const domCard = cardInstance.returnCard();

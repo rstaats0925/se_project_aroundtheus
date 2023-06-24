@@ -21,6 +21,7 @@ export default class Card {
     this.#handleImageClick = handleImageClick;
     this.#deleteButtonHandler = deleteButtonHandler;
     this.#likeButtonHandler = likeButtonHandler;
+    this.liked = false;
   }
 
   #returnEmptyClone () {
