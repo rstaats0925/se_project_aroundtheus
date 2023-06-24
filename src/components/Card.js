@@ -42,11 +42,11 @@ export default class Card {
 
   #addDeleteButtonEventListener() {
     this.#deleteButton.addEventListener("click", () => {
-      this.#deleteButtonHandler(this);
+      this.#deleteButtonHandler();
     });
   }
 
-  #deleteCard (event) {
+  deleteCard (event) {
     event.target.closest(".card").remove();
   }
 

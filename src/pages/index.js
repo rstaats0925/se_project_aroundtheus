@@ -49,12 +49,9 @@ const api = new Api();
 function addCard (cardDataObj) {
   const cardInstance = new Card(cardDataObj, "#card-template", (event) => {
     imageModalHandler.open(event);
-  }, (data) => {
+  }, () => {
     deleteModalHandler.open();
-    deleteModalHandler.setSubmitAction(() => {
-      deleteCard(data);
-    })
-  });
+  })
   
   const domCard = cardInstance.returnCard();
 
