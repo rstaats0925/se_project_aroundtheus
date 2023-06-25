@@ -27,71 +27,62 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 profileModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal",
-(data) => {
-  api.addCard(data).then(response => {
-    if (!response.ok) {
-      return Promise.reject(`Error: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(json => {
-    const card = new Card(json, "#card-template",
-    (event) => {  // image handler
-      imageModalHandler.open(event);
-    },
-    (data, event) => {  //delete button handler
-      deleteModalHandler.open();
-      deleteModalHandler.setSubmitAction(() => {
-        api.removeCard(data).then(response => {
-          if (!response.ok) {
-            return Promise.reject(`Error: ${reponse.status}`);
-          }
-          card.deleteCard(event);
-        })
-        .catch(err => {
-          console.error(err);
-        })
-      })
-    },
-    (data, event) => {  //like button handler
-      if (!card.liked) {
-        api.addLike(data).then(response => {
-          if (!response.ok) {
-            return Promise.reject(`Error: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(json => {
-          card.updateLikeCount(json);
-          card.toggleLikeButton(event);
-          card.liked = !card.liked;
-        })
-        .catch(err => {
-          console.error(err);
-        })
-      } else {
-          api.removeLike(data).then(response => {
-            if (!response.ok) {
-              return Promise(reject(`Error: ${response.status}`));
-            }
-            return response.json();
-          })
-          .then(json => {
-            card.updateLikeCount(json);
-            card.toggleLikeButton(event);
-            card.liked = !card.liked;
-          })
-          .catch(err => {
-            console.error(err);
-          })
+  (data) => {
+    api.addCard(data).then(response => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`);
       }
-    }    
-    )
-    section.addItem(card.returnCard());
-  })
-  .catch(err => {
-    console.error(err);
-  })
+      return response.json();
+    })
+    .then(json => {
+      const card = new Card(json, "#card-template",
+        (event) => {  //image handler
+          imageModalHandler.open(event);
+        },
+        (data, event) => {  //delete button handler
+          deleteModalHandler.open();
+          deleteModalHandler.setSubmitAction(() => {
+            api.removeCard(data).then(response => {
+              if (!response.ok) {
+                return Promise.reject(`Error: ${response.status}`);
+              }
+              card.deleteCard(event);
+            })
+            .catch(err => {
+              console.error(err);
+            })
+          })
+        },
+        (data, event) => {  //like button handler
+          if (!card.liked) {
+            api.addLike(data).then(response => {
+              if (!response.ok) {
+                return Promise.reject(`Error: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(json => {
+              card.updateLikeCount(json);
+              card.toggleLikeButton(event);
+              card.liked = !card.liked;
+            })
+          } else {
+            api.removeLike(data).then(response => {
+              if (!response.ok) {
+                return Promise.reject(`Error: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(json => {
+              card.updateLikeCount(json);
+              card.toggleLikeButton(event);
+              card.liked = !card.liked;
+            })
+          }
+        }      
+        )
+        section.addItem(card.returnCard());
+    })
 });
 cardModalHandler.setEventListeners();
 
@@ -147,11 +138,11 @@ const profileInfo = new UserInfo({
 });
 
 api.getUserAndCardInfo().then(
-  data => {
-    profileInfo.setUserInfo(data[0]);
+  promises => {
+    profileInfo.setUserInfo(promises[0]);
 
     const gridHandler = new Section({
-      items: data[1],
+      items: promises[1],
       renderer: addCard
     }, ".cards__grid");
 
