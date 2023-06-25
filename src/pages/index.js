@@ -52,8 +52,41 @@ const cardModalHandler = new PopupWithForm("#add-card-modal",
           console.error(err);
         })
       })
-    })
-
+    },
+    (data, event) => {  //like button handler
+      if (!card.liked) {
+        api.addLike(data).then(response => {
+          if (!response.ok) {
+            return Promise.reject(`Error: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(json => {
+          card.updateLikeCount(json);
+          card.toggleLikeButton(event);
+          card.liked = !card.liked;
+        })
+        .catch(err => {
+          console.error(err);
+        })
+      } else {
+          api.removeLike(data).then(response => {
+            if (!response.ok) {
+              return Promise(reject(`Error: ${response.status}`));
+            }
+            return response.json();
+          })
+          .then(json => {
+            card.updateLikeCount(json);
+            card.toggleLikeButton(event);
+            card.liked = !card.liked;
+          })
+          .catch(err => {
+            console.error(err);
+          })
+      }
+    }    
+    )
     section.addItem(card.returnCard());
   })
   .catch(err => {
