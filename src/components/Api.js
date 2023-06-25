@@ -73,16 +73,6 @@ export default class Api {
       },
       body: JSON.stringify(data)
     })
-    .then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Error: ${response.status}`)
-      }
-
-      return response.json();
-    })
-    .catch(err => {
-      console.error(err);
-    })
   }
 
   removeCard(data) {

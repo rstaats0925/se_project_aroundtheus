@@ -26,30 +26,49 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 });
 profileModalHandler.setEventListeners();
 
-const cardModalHandler = new PopupWithForm("#add-card-modal", (data) => {
+const cardModalHandler = new PopupWithForm("#add-card-modal",
+(data) => {
   api.addCard(data).then(response => {
-    const section = new Section({
-      items: [response],
-      renderer: addCard
-    }, ".cards__grid")
-
-    const domCard = new Card(response, "#card-template", (event) => {
+    if (!response.ok) {
+      return Promise.reject(`Error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(json => {
+    const card = new Card(json, "#card-template",
+    (event) => {  // image handler
       imageModalHandler.open(event);
-    }, (data, event) => {
+    },
+    (data, event) => {  //delete button handler
       deleteModalHandler.open();
       deleteModalHandler.setSubmitAction(() => {
-        api.removeCard(data);
-        domCard.deleteCard(event);
+        api.removeCard(data).then(response => {
+          if (!response.ok) {
+            return Promise.reject(`Error: ${reponse.status}`);
+          }
+          card.deleteCard(event);
+        })
+        .catch(err => {
+          console.error(err);
+        })
       })
     })
-    
-    section.addItem(domCard.returnCard());
+
+    section.addItem(card.returnCard());
+  })
+  .catch(err => {
+    console.error(err);
   })
 });
 cardModalHandler.setEventListeners();
 
 //api for handling http requests
 const api = new Api();
+
+const section = new Section({
+  items: [],
+  renderer: addCard
+}, ".cards__grid")
 
 //used to render initial cards
 function addCard (cardDataObj) {
@@ -95,11 +114,11 @@ const profileInfo = new UserInfo({
 });
 
 api.getUserAndCardInfo().then(
-  promises => {
-    profileInfo.setUserInfo(promises[0]);
+  data => {
+    profileInfo.setUserInfo(data[0]);
 
     const gridHandler = new Section({
-      items: promises[1],
+      items: data[1],
       renderer: addCard
     }, ".cards__grid");
 
