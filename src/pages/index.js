@@ -60,8 +60,11 @@ function addCard (cardDataObj) {
   (data, event) => {
     deleteModalHandler.open();
     deleteModalHandler.setSubmitAction(() => {
-      api.removeCard(data);
-      cardInstance.deleteCard(event);
+      api.removeCard(data).then(response => {
+        if (response.ok) {
+          cardInstance.deleteCard(event);
+        }
+      })
     })
   },
   (data, event) => {

@@ -92,7 +92,7 @@ export default class Api {
         authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
         "Content-Type": "application/json"
       }
-    })    
+    })
   }
 
   addLike(data) {

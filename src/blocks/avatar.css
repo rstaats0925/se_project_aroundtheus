@@ -5,6 +5,11 @@
   margin-right: 30px;
 }
 
+.avatar:hover {
+  cursor: pointer;
+  background-color: rbga(0, 0, 0, 0.5);
+}
+
 @media screen and (max-width: 800px) {
   .avatar {
     margin: 0;
