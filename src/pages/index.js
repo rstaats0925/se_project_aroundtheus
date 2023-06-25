@@ -30,6 +30,7 @@ const cardModalHandler = new PopupWithForm("#add-card-modal",
   data => {
     api.addCard(data)
     .then(json => {
+      //if the response was good then create a new card & add it to the page
       const card = new Card(json, "#card-template",
       event => {  //image handler
         imageModalHandler.open(event);
@@ -122,6 +123,7 @@ function addCard (cardDataObj) {
   const domCard = cardInstance.returnCard();
 
   this.addItem(domCard);
+  
 }
 
 const profileInfo = new UserInfo({
@@ -131,15 +133,10 @@ const profileInfo = new UserInfo({
 });
 
 api.getUserAndCardInfo().then(
-  promises => {
-    profileInfo.setUserInfo(promises[0]);
-
-    const gridHandler = new Section({
-      items: promises[1],
-      renderer: addCard
-    }, ".cards__grid");
-
-    gridHandler.renderItems();
+  data => {
+    profileInfo.setUserInfo(data[0]);
+    section.items = data[1];
+    section.renderItems();
   });
 
 //Form Validation
