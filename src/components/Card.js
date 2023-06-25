@@ -11,6 +11,7 @@ export default class Card {
   #deleteButtonHandler;
   #likeButtonHandler;
   #owner;
+  #likeCounter;
 
   constructor ({name, link, owner, _id}, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
     this.#title = name;
@@ -45,6 +46,10 @@ export default class Card {
     event.target.classList.toggle("card__like-button_inactive");
   }
 
+  updateLikeCount(data) {
+    this.#likeCounter.textContent = data.likes.length;
+  }
+
   #addDeleteButtonEventListener() {
     this.#deleteButton.addEventListener("click", (event) => {
       this.#deleteButtonHandler(this, event);
@@ -70,6 +75,7 @@ export default class Card {
   #completeNewCard () {
     this.#card = this.#returnEmptyClone();
     this.#likeButton = this.#card.querySelector(".card__like-button");
+    this.#likeCounter = this.#card.querySelector(".card__like-count");
     this.#cardImage = this.#card.querySelector(".card__image");
     this.#cardCaption = this.#card.querySelector(".card__caption");
     this.#deleteButton = this.#card.querySelector(".card__delete");

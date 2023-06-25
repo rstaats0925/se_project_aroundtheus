@@ -66,11 +66,15 @@ function addCard (cardDataObj) {
   },
   (data, event) => {
     if (!cardInstance.liked) {
-      api.addLike(data);
+      api.addLike(data).then(json => {
+        cardInstance.updateLikeCount(json);
+      })
       cardInstance.toggleLikeButton(event);
       cardInstance.liked = !cardInstance.liked;
     } else {
-        api.removeLike(data);
+        api.removeLike(data).then(json => {
+          cardInstance.updateLikeCount(json);
+        })
         cardInstance.toggleLikeButton(event);
         cardInstance.liked = !cardInstance.liked;
     }
