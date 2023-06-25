@@ -73,6 +73,12 @@ export default class Api {
       },
       body: JSON.stringify(data)
     })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+      return response.json();
+    });
   }
 
   removeCard(data) {
@@ -82,6 +88,12 @@ export default class Api {
         authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
         "Content-Type": "application/json"
       }
+    })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+      return response.json();
     })
   }
 
@@ -93,6 +105,12 @@ export default class Api {
         "Content-Type": "application/json"
       }
     })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+      return response.json();
+    })
   }
 
   removeLike (data) {
@@ -102,6 +120,12 @@ export default class Api {
         authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
         "Content-Type": "application/json"
       }
+    })
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(`Errer: ${response.status}`);
+      }
+      return response.json();
     })
   }
 }

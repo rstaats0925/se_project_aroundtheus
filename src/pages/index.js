@@ -27,63 +27,56 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 profileModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal",
-  (data) => {
-    api.addCard(data).then(response => {
-      if (!response.ok) {
-        return Promise.reject(`Error: ${response.status}`);
-      }
-      return response.json();
-    })
+  data => {
+    api.addCard(data)
     .then(json => {
       const card = new Card(json, "#card-template",
-        (event) => {  //image handler
-          imageModalHandler.open(event);
-        },
-        (data, event) => {  //delete button handler
-          deleteModalHandler.open();
-          deleteModalHandler.setSubmitAction(() => {
-            api.removeCard(data).then(response => {
-              if (!response.ok) {
-                return Promise.reject(`Error: ${response.status}`);
-              }
-              card.deleteCard(event);
+      event => {  //image handler
+        imageModalHandler.open(event);
+      },
+      (data, event) => {  // delete button handler
+        deleteModalHandler.open();
+        deleteModalHandler.setSubmitAction(() => {
+          api.removeCard(data)
+          .then(json => {
+            card.deleteCard(event);
+          })
+          .catch(err => {
+            console.error(err);
+          })
+        })
+      },
+      (data, event) => {  //like button handler
+        if (!card.liked) {
+          api.addLike(data)
+          .then(json => {
+            card.updateLikeCount(json);
+            card.toggleLikeButton(event);
+            card.liked = !card.liked;
+          })
+          .catch(err => {
+            console.error(err);
+          })
+        } else {
+            api.removeLike(data)
+            .then(json => {
+              card.updateLikeCount(json);
+              card.toggleLikeButton(event);
+              card.liked = !card.liked;
             })
             .catch(err => {
               console.error(err);
             })
-          })
-        },
-        (data, event) => {  //like button handler
-          if (!card.liked) {
-            api.addLike(data).then(response => {
-              if (!response.ok) {
-                return Promise.reject(`Error: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then(json => {
-              card.updateLikeCount(json);
-              card.toggleLikeButton(event);
-              card.liked = !card.liked;
-            })
-          } else {
-            api.removeLike(data).then(response => {
-              if (!response.ok) {
-                return Promise.reject(`Error: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then(json => {
-              card.updateLikeCount(json);
-              card.toggleLikeButton(event);
-              card.liked = !card.liked;
-            })
-          }
-        }      
-        )
-        section.addItem(card.returnCard());
+        }    
+      }
+      )
+      section.addItem(card.returnCard());
     })
-});
+    .catch(err => {
+      console.error(err);
+    })
+  }
+);
 cardModalHandler.setEventListeners();
 
 //api for handling http requests
