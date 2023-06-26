@@ -11,6 +11,7 @@ import PopupDeleteCard from "../components/PopupDeleteCard.js";
 //Buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
+const editAvatarButton = document.querySelector(".avatar-edit-button");
 
 //modalHandlers
 const deleteModalHandler = new PopupDeleteCard("#delete-card-modal");
