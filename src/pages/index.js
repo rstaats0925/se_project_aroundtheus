@@ -27,6 +27,11 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 });
 profileModalHandler.setEventListeners();
 
+const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", () => {
+  console.log("Clicked Edit Avatar Submit Button");
+})
+avatarModalHandler.setEventListeners();
+
 const cardModalHandler = new PopupWithForm("#add-card-modal",
   data => {
     api.addCard(data)
@@ -134,4 +139,9 @@ profileEditButton.addEventListener("click", (event) => {
 addButton.addEventListener("click", (event) => {
   addCardValidator.disableButtonState();
   cardModalHandler.open(event);
+});
+
+editAvatarButton.addEventListener("click", (event) => {
+  avatarValidator.disableButtonState();
+  avatarModalHandler.open(event);
 });
