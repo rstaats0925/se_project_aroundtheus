@@ -21,15 +21,30 @@ const imageModalHandler = new PopupWithImage("#image-modal");
 imageModalHandler.setEventListeners();
 
 const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
-  api.updateProfileInfo(data).then((res) => {
-    profileInfo.setUserInfo(res)
+  profileModalHandler.changeButtonText(true);
+  api.updateProfileInfo(data)
+  .then(json => {
+    profileInfo.setUserInfo(json);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+  .finally(() => {
+    profileModalHandler.changeButtonText(false);
   })
 });
 profileModalHandler.setEventListeners();
 
-const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", () => {
-  console.log("Clicked Edit Avatar Submit Button");
-})
+const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", (data) => {
+  api.updateAvatar(data)
+  .then(json => {
+    api.updateAvatar(json);
+    profileInfo.setAvatar(json);
+  })
+  .catch(err => {
+    console.error(err);
+  })
+});
 avatarModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal",
