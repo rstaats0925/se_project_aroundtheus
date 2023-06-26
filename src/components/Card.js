@@ -81,11 +81,10 @@ export default class Card {
     this.#deleteButton = this.#card.querySelector(".card__delete");
     this.#fillMarkupWithData();
     this.#addEventListeners();
-
+    
     if (this.#owner._id != "da6f0aaa844471b7fec4eea5") {
       this.#deleteButton.hidden = true;
     }
-    this.#deleteButton._id
 
     return this.#card;
   }

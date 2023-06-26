@@ -30,48 +30,7 @@ const cardModalHandler = new PopupWithForm("#add-card-modal",
   data => {
     api.addCard(data)
     .then(json => {
-      //if the response was good then create a new card & add it to the page
-      const card = new Card(json, "#card-template",
-      event => {  //image handler
-        imageModalHandler.open(event);
-      },
-      (data, event) => {  // delete button handler
-        deleteModalHandler.open();
-        deleteModalHandler.setSubmitAction(() => {
-          api.removeCard(data)
-          .then(json => {
-            card.deleteCard(event);
-          })
-          .catch(err => {
-            console.error(err);
-          })
-        })
-      },
-      (data, event) => {  //like button handler
-        if (!card.liked) {
-          api.addLike(data)
-          .then(json => {
-            card.updateLikeCount(json);
-            card.toggleLikeButton(event);
-            card.liked = !card.liked;
-          })
-          .catch(err => {
-            console.error(err);
-          })
-        } else {
-            api.removeLike(data)
-            .then(json => {
-              card.updateLikeCount(json);
-              card.toggleLikeButton(event);
-              card.liked = !card.liked;
-            })
-            .catch(err => {
-              console.error(err);
-            })
-        }    
-      }
-      )
-      section.addItem(card.returnCard());
+      addCard(json);
     })
     .catch(err => {
       console.error(err);
@@ -89,41 +48,48 @@ const section = new Section({
 }, ".cards__grid")
 
 //used to render initial cards
-function addCard (cardDataObj) {
-  const cardInstance = new Card(cardDataObj, "#card-template",
-  (event) => {
+function addCard (data) {
+  const card = new Card(data, "#card-template",
+  event => {  //image handler
     imageModalHandler.open(event);
   },
-  (data, event) => {
+  (data, event) => {  // delete button handler
     deleteModalHandler.open();
     deleteModalHandler.setSubmitAction(() => {
-      api.removeCard(data).then(response => {
-        if (response.ok) {
-          cardInstance.deleteCard(event);
-        }
+      api.removeCard(data)
+      .then(json => {
+        card.deleteCard(event);
+      })
+      .catch(err => {
+        console.error(err);
       })
     })
   },
-  (data, event) => {
-    if (!cardInstance.liked) {
-      api.addLike(data).then(json => {
-        cardInstance.updateLikeCount(json);
+  (data, event) => {  //like button handler
+    if (!card.liked) {
+      api.addLike(data)
+      .then(json => {
+        card.updateLikeCount(json);
+        card.toggleLikeButton(event);
+        card.liked = !card.liked;
       })
-      cardInstance.toggleLikeButton(event);
-      cardInstance.liked = !cardInstance.liked;
+      .catch(err => {
+        console.error(err);
+      })
     } else {
-        api.removeLike(data).then(json => {
-          cardInstance.updateLikeCount(json);
+        api.removeLike(data)
+        .then(json => {
+          card.updateLikeCount(json);
+          card.toggleLikeButton(event);
+          card.liked = !card.liked;
         })
-        cardInstance.toggleLikeButton(event);
-        cardInstance.liked = !cardInstance.liked;
-    }
-  })
-  
-  const domCard = cardInstance.returnCard();
-
-  this.addItem(domCard);
-  
+        .catch(err => {
+          console.error(err);
+        })
+    }    
+  }
+  )
+  section.addItem(card.returnCard());
 }
 
 const profileInfo = new UserInfo({
