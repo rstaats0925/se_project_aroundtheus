@@ -122,6 +122,9 @@ profileValidator.enableValidation();
 const addCardValidator = new FormValidator(config, "#add-card-form");
 addCardValidator.enableValidation();
 
+const avatarValidator = new FormValidator(config, "#avatar-edit-modal");
+avatarValidator.enableValidation();
+
 //eventListeners
 profileEditButton.addEventListener("click", (event) => {
   profileValidator.disableButtonState();
