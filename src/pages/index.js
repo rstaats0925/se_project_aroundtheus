@@ -36,6 +36,7 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
 profileModalHandler.setEventListeners();
 
 const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", (data) => {
+  avatarModalHandler.changeButtonText(true);
   api.updateAvatar(data)
   .then(json => {
     api.updateAvatar(json);
@@ -44,17 +45,24 @@ const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", (data) => {
   .catch(err => {
     console.error(err);
   })
+  .finally(() => {
+    avatarModalHandler.changeButtonText(false);
+  })
 });
 avatarModalHandler.setEventListeners();
 
 const cardModalHandler = new PopupWithForm("#add-card-modal",
   data => {
+    cardModalHandler.changeButtonText(true);
     api.addCard(data)
     .then(json => {
       addCard(json);
     })
     .catch(err => {
       console.error(err);
+    })
+    .finally(() => {
+      cardModalHandler.changeButtonText(false);
     })
   }
 );
