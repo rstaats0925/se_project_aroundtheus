@@ -130,11 +130,14 @@ const profileInfo = new UserInfo({
   avatarSelector: ".avatar"
 });
 
-api.getUserAndCardInfo().then(
-  data => {
+api.getUserAndCardInfo()
+  .then(data => {
     profileInfo.setUserInfo(data[0]);
     section.items = data[1];
     section.renderItems();
+  })
+  .catch(err => {
+    console.error(err);
   });
 
 //Form Validation

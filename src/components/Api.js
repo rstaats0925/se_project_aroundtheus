@@ -2,7 +2,7 @@ export default class Api {
   #baseUrl;
   #headers;
   constructor(headers) {
-    this.#baseURL = "https://around.nomoreparties.co";
+    this.#baseUrl = "https://around.nomoreparties.co/v1/group-12";
     this.#headers = headers;
   }
 
@@ -14,26 +14,20 @@ export default class Api {
   }
 
   getUserInfo () {
-    return fetch(`${this.#baseUrl}/v1/group-12/users/me`, {
+    return fetch(`${this.#baseUrl}/users/me`, {
       headers: this.#headers
     })
     .then(response => {
-      this.#checkResponse(response);
-    })
-    .catch(err => {
-      console.error(err);
+      return this.#checkResponse(response);
     })
   }
 
   getInitialCards() {
-    return fetch(`${this.#baseUrl}/v1/group-12/cards`, {
+    return fetch(`${this.#baseUrl}/cards`, {
       headers: this.#headers
     })
     .then(response => {
-      this.#checkResponse(response);
-    })
-    .catch(err => {
-      console.error(err);
+      return this.#checkResponse(response);
     })
   }
 
@@ -42,65 +36,65 @@ export default class Api {
   }
 
   updateProfileInfo(data) {
-    return fetch(`${this.#baseUrl}/v1/group-12/users/me`, {
+    return fetch(`${this.#baseUrl}/users/me`, {
       method: "PATCH",
       headers: this.#headers,
       body: JSON.stringify(data)
     })
     .then(response => {
-      this.#checkResponse(response);
+      return this.#checkResponse(response);
     })
   }
 
   updateAvatar (data) {
-    return fetch(`${this.#baseUrl}/v1/group-12/users/me/avatar`, {
+    return fetch(`${this.#baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this.#headers,
       body: JSON.stringify(data)
     })
     .then(response => {
-      this.#checkResponse(response);
+      return this.#checkResponse(response);
     })
   }
 
   addCard(data) {
-    return fetch(`${this.#baseUrl}/v1/group-12/cards`, {
+    return fetch(`${this.#baseUrl}/cards`, {
       method: "POST",
       headers: this.#headers,
       body: JSON.stringify(data)
     })
     .then(response => {
-      this.#checkResponse(response);
+      return this.#checkResponse(response);
     });
   }
 
   removeCard(data) {
-    return fetch(`${this.#baseUrl}/v1/group-12/cards/${data._id}`, {
+    return fetch(`${this.#baseUrl}/cards/${data._id}`, {
       method: "DELETE",
       headers: this.#headers
     })
     .then(response => {
-      this.#checkResponse(response);
+      return this.#checkResponse(response);
     })
   }
 
   addLike(data) {
-    return fetch(`${this.#baseUrl}/v1/group-12/cards/likes/${data._id}`, {
+    return fetch(`${this.#baseUrl}/cards/likes/${data._id}`, {
       method: "PUT",
       headers: this.#headers
     })
     .then(response => {
-      this.#checkResponse(response);
+      return this.#checkResponse(response);
     })
   }
 
   removeLike (data) {
-    return fetch(`${this.#baseUrl}/v1/group-12/cards/likes/${data._id}`, {
+    return fetch(`${this.#baseUrl}/cards/likes/${data._id}`, {
       method: "DELETE",
       headers: this.#headers
     })
     .then(response => {
-      this.#checkResponse(response);
+      return this.#checkResponse(response);
     })
   }
 }
