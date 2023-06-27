@@ -14,14 +14,14 @@ const addButton = document.querySelector("#add-button");
 const editAvatarButton = document.querySelector(".avatar-edit-button");
 
 //modalHandlers
-const deleteModalHandler = new PopupDeleteCard("#delete-card-modal");
-deleteModalHandler.setEventListeners();
+const deleteModal = new PopupDeleteCard("#delete-card-modal");
+deleteModal.setEventListeners();
 
-const imageModalHandler = new PopupWithImage("#image-modal");
-imageModalHandler.setEventListeners();
+const imageModal = new PopupWithImage("#image-modal");
+imageModal.setEventListeners();
 
-const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
-  profileModalHandler.changeButtonText(true);
+const profileModal = new PopupWithForm("#profile-edit-modal", (data) => {
+  profileModal.changeButtonText(true);
   api.updateProfileInfo(data)
   .then(json => {
     profileInfo.setUserInfo(json);
@@ -30,13 +30,13 @@ const profileModalHandler = new PopupWithForm("#profile-edit-modal", (data) => {
     console.error(err);
   })
   .finally(() => {
-    profileModalHandler.changeButtonText(false);
+    profileModal.changeButtonText(false);
   })
 });
-profileModalHandler.setEventListeners();
+profileModal.setEventListeners();
 
-const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", (data) => {
-  avatarModalHandler.changeButtonText(true);
+const avatarModal = new PopupWithForm("#avatar-edit-modal", (data) => {
+  avatarModal.changeButtonText(true);
   api.updateAvatar(data)
   .then(json => {
     api.updateAvatar(json);
@@ -46,14 +46,14 @@ const avatarModalHandler = new PopupWithForm("#avatar-edit-modal", (data) => {
     console.error(err);
   })
   .finally(() => {
-    avatarModalHandler.changeButtonText(false);
+    avatarModal.changeButtonText(false);
   })
 });
-avatarModalHandler.setEventListeners();
+avatarModal.setEventListeners();
 
-const cardModalHandler = new PopupWithForm("#add-card-modal",
+const cardModal = new PopupWithForm("#add-card-modal",
   data => {
-    cardModalHandler.changeButtonText(true);
+    cardModal.changeButtonText(true);
     api.addCard(data)
     .then(json => {
       addCard(json);
@@ -62,11 +62,11 @@ const cardModalHandler = new PopupWithForm("#add-card-modal",
       console.error(err);
     })
     .finally(() => {
-      cardModalHandler.changeButtonText(false);
+      cardModal.changeButtonText(false);
     })
   }
 );
-cardModalHandler.setEventListeners();
+cardModal.setEventListeners();
 
 //api for handling http requests
 const api = new Api();
@@ -80,11 +80,11 @@ const section = new Section({
 function addCard (data) {
   const card = new Card(data, "#card-template",
   event => {  //image handler
-    imageModalHandler.open(event);
+    imageModal.open(event);
   },
   (data, event) => {  // delete button handler
-    deleteModalHandler.open();
-    deleteModalHandler.setSubmitAction(() => {
+    deleteModal.open();
+    deleteModal.setSubmitAction(() => {
       api.removeCard(data)
       .then(json => {
         card.deleteCard(event);
@@ -156,15 +156,15 @@ avatarValidator.enableValidation();
 //eventListeners
 profileEditButton.addEventListener("click", (event) => {
   profileValidator.disableButtonState();
-  profileModalHandler.open(event);
+  profileModal.open(event);
 });
 
 addButton.addEventListener("click", (event) => {
   addCardValidator.disableButtonState();
-  cardModalHandler.open(event);
+  cardModal.open(event);
 });
 
 editAvatarButton.addEventListener("click", (event) => {
   avatarValidator.disableButtonState();
-  avatarModalHandler.open(event);
+  avatarModal.open(event);
 });
