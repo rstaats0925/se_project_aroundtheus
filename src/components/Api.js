@@ -1,6 +1,9 @@
 export default class Api {
-  constructor() {
-    this.baseURL = "https://around.nomoreparties.co";
+  #baseUrl;
+  #headers;
+  constructor(headers) {
+    this.#baseURL = "https://around.nomoreparties.co";
+    this.#headers = headers;
   }
 
   #checkResponse(response) {
@@ -11,10 +14,8 @@ export default class Api {
   }
 
   getUserInfo () {
-    return fetch(`${this.baseURL}/v1/group-12/users/me`, {
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4"
-      }
+    return fetch(`${this.#baseUrl}/v1/group-12/users/me`, {
+      headers: this.#headers
     })
     .then(response => {
       this.#checkResponse(response);
@@ -25,10 +26,8 @@ export default class Api {
   }
 
   getInitialCards() {
-    return fetch(`${this.baseURL}/v1/group-12/cards`, {
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4"
-      }
+    return fetch(`${this.#baseUrl}/v1/group-12/cards`, {
+      headers: this.#headers
     })
     .then(response => {
       this.#checkResponse(response);
@@ -43,12 +42,9 @@ export default class Api {
   }
 
   updateProfileInfo(data) {
-    return fetch(`${this.baseURL}/v1/group-12/users/me`, {
+    return fetch(`${this.#baseUrl}/v1/group-12/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-        "Content-Type": "application/json"
-      },
+      headers: this.#headers,
       body: JSON.stringify(data)
     })
     .then(response => {
@@ -57,12 +53,9 @@ export default class Api {
   }
 
   updateAvatar (data) {
-    return fetch(`${this.baseURL}/v1/group-12/users/me/avatar`, {
+    return fetch(`${this.#baseUrl}/v1/group-12/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-        "Content-Type": "application/json"
-      },
+      headers: this.#headers,
       body: JSON.stringify(data)
     })
     .then(response => {
@@ -71,12 +64,9 @@ export default class Api {
   }
 
   addCard(data) {
-    return fetch(`${this.baseURL}/v1/group-12/cards`, {
+    return fetch(`${this.#baseUrl}/v1/group-12/cards`, {
       method: "POST",
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-        "Content-Type": "application/json"
-      },
+      headers: this.#headers,
       body: JSON.stringify(data)
     })
     .then(response => {
@@ -85,12 +75,9 @@ export default class Api {
   }
 
   removeCard(data) {
-    return fetch(`${this.baseURL}/v1/group-12/cards/${data._id}`, {
+    return fetch(`${this.#baseUrl}/v1/group-12/cards/${data._id}`, {
       method: "DELETE",
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-        "Content-Type": "application/json"
-      }
+      headers: this.#headers
     })
     .then(response => {
       this.#checkResponse(response);
@@ -98,12 +85,9 @@ export default class Api {
   }
 
   addLike(data) {
-    return fetch(`${this.baseURL}/v1/group-12/cards/likes/${data._id}`, {
+    return fetch(`${this.#baseUrl}/v1/group-12/cards/likes/${data._id}`, {
       method: "PUT",
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-        "Content-Type": "application/json"
-      }
+      headers: this.#headers
     })
     .then(response => {
       this.#checkResponse(response);
@@ -111,12 +95,9 @@ export default class Api {
   }
 
   removeLike (data) {
-    return fetch(`${this.baseURL}/v1/group-12/cards/likes/${data._id}`, {
+    return fetch(`${this.#baseUrl}/v1/group-12/cards/likes/${data._id}`, {
       method: "DELETE",
-      headers: {
-        authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
-        "Content-Type": "application/json"
-      }
+      headers: this.#headers
     })
     .then(response => {
       this.#checkResponse(response);

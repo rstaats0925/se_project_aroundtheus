@@ -69,7 +69,10 @@ const cardModal = new PopupWithForm("#add-card-modal",
 cardModal.setEventListeners();
 
 //api for handling http requests
-const api = new Api();
+const api = new Api({
+  authorization: "397bd50b-9f39-4bee-ad9c-11e69aa20ec4",
+  "Content-Type": "application/json"}
+  );
 
 const section = new Section({
   items: [],
