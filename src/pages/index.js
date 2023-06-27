@@ -163,6 +163,7 @@ avatarValidator.enableValidation();
 profileEditButton.addEventListener("click", (event) => {
   profileValidator.disableButtonState();
   profileModal.open(event);
+  profileModal.setInputValues(profileInfo.getUserInfo());
 });
 
 addButton.addEventListener("click", (event) => {
