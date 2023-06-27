@@ -13,7 +13,7 @@ const profileEditButton = document.querySelector("#profile-edit-btn");
 const addButton = document.querySelector("#add-button");
 const editAvatarButton = document.querySelector(".avatar-edit-button");
 
-//modalHandlers
+//modals
 const deleteModal = new PopupDeleteCard("#delete-card-modal");
 deleteModal.setEventListeners();
 
@@ -25,6 +25,7 @@ const profileModal = new PopupWithForm("#profile-edit-modal", (data) => {
   api.updateProfileInfo(data)
   .then(json => {
     profileInfo.setUserInfo(json);
+    profileModal.close();
   })
   .catch(err => {
     console.error(err);
@@ -39,8 +40,8 @@ const avatarModal = new PopupWithForm("#avatar-edit-modal", (data) => {
   avatarModal.changeButtonText(true);
   api.updateAvatar(data)
   .then(json => {
-    api.updateAvatar(json);
     profileInfo.setAvatar(json);
+    avatarModal.close();
   })
   .catch(err => {
     console.error(err);
@@ -57,6 +58,7 @@ const cardModal = new PopupWithForm("#add-card-modal",
     api.addCard(data)
     .then(json => {
       addCard(json);
+      cardModal.close();
     })
     .catch(err => {
       console.error(err);
@@ -74,14 +76,15 @@ const api = new Api({
   "Content-Type": "application/json"}
   );
 
+//section for rendering items on page
 const section = new Section({
   items: [],
   renderer: addCard
 }, ".cards__grid")
 
-//used to render initial cards
+//function that's called whenever a card needs to be added to
 function addCard (data) {
-  const card = new Card(data, "#card-template",
+  const card = new Card(data, profileInfo.userId, "#card-template",
   event => {  //image handler
     imageModal.open(event);
   },
@@ -132,6 +135,7 @@ const profileInfo = new UserInfo({
 
 api.getUserAndCardInfo()
   .then(data => {
+    profileInfo.setUserId(data[0]);
     profileInfo.setUserInfo(data[0]);
     section.items = data[1];
     section.renderItems();

@@ -7,6 +7,11 @@ export default class UserInfo {
     this.#profileUsername = document.querySelector(nameSelector);
     this.#profileAbout = document.querySelector(aboutSelector);
     this.#avatar = document.querySelector(avatarSelector);
+    this.userId = "";
+  }
+
+  setUserId({_id}) {
+    this.userId = _id;
   }
 
   getUserInfo() {

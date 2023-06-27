@@ -10,14 +10,15 @@ export default class Card {
   #handleImageClick;
   #deleteButtonHandler;
   #likeButtonHandler;
-  #owner;
+  #userId;
+  #cardOwner;
   #likeCounter;
 
-  constructor ({name, link, owner, _id}, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
+  constructor ({name, link, owner}, userId, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
     this.#title = name;
     this.#link = link;
-    this.#owner = owner;
-    this._id = _id;
+    this.#userId = userId;
+    this.#cardOwner = owner._id;
     this.#cardTemplateSelector = cardTemplateSelector;
     this.#handleImageClick = handleImageClick;
     this.#deleteButtonHandler = deleteButtonHandler;
@@ -81,9 +82,12 @@ export default class Card {
     this.#deleteButton = this.#card.querySelector(".card__delete");
     this.#fillMarkupWithData();
     this.#addEventListeners();
-    
-    if (this.#owner._id != "da6f0aaa844471b7fec4eea5") {
-      this.#deleteButton.hidden = true;
+    console.log(this)
+    if (this.#userId === this.#cardOwner) {
+      this.#deleteButton.disabled = false;
+    }
+    else{
+      this.#deleteButton.disabled = true;
     }
 
     return this.#card;
