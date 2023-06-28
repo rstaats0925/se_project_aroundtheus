@@ -7,6 +7,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupDeleteCard from "../components/PopupDeleteCard.js";
+import config from "../utils/constants.js";
 
 //Buttons
 const profileEditButton = document.querySelector("#profile-edit-btn");
@@ -88,15 +89,20 @@ function addCard (data) {
   event => {  //image handler
     imageModal.open(event);
   },
-  (data, event) => {  // delete button handler
+  (cardId) => {  // delete button handler
     deleteModal.open();
     deleteModal.setSubmitAction(() => {
-      api.removeCard(data)
+      deleteModal.changeButtonText(true);
+      api.removeCard(cardId)
       .then(json => {
         card.deleteCard(event);
+        deleteModal.close();
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
+        deleteModal.changeButtonText(false);
       })
     })
   },
@@ -144,15 +150,7 @@ api.getUserAndCardInfo()
     console.error(err);
   });
 
-//Form Validation
-const config = { 
-  formSelector: ".modal__form", 
-  inputSelector: ".modal__input", 
-  submitButtonSelector: ".modal__save-button", 
-  inactiveButtonClass: "modal__save-button_disabled", 
-  inputErrorClass: "modal__input-error", 
-  errorClass: "modal__input-error_active" 
-}; 
+//Form Validation 
 
 const profileValidator = new FormValidator(config, "#profile-edit-form");
 profileValidator.enableValidation();
@@ -166,8 +164,10 @@ avatarValidator.enableValidation();
 //eventListeners
 profileEditButton.addEventListener("click", (event) => {
   profileValidator.disableButtonState();
+  const userData =  profileInfo.getUserInfo();
+  document.querySelector("#profile-input-username").value = userData.name;
+  document.querySelector("#profile-input-about").value = userData.about;
   profileModal.open(event);
-  profileModal.setInputValues(profileInfo.getUserInfo());
 });
 
 addButton.addEventListener("click", (event) => {

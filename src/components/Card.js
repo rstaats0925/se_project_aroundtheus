@@ -14,11 +14,13 @@ export default class Card {
   #cardOwner;
   #likeCounter;
 
-  constructor ({name, link, owner}, userId, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
+  constructor ({name, link, owner, _id}, userId, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
     this.#title = name;
     this.#link = link;
     this.#userId = userId;
-    this.#cardOwner = owner._id;
+    this.isMine = (userId === owner._id);
+    this._id = _id;
+    this.cardOwner = owner;
     this.#cardTemplateSelector = cardTemplateSelector;
     this.#handleImageClick = handleImageClick;
     this.#deleteButtonHandler = deleteButtonHandler;
@@ -53,12 +55,13 @@ export default class Card {
 
   #addDeleteButtonEventListener() {
     this.#deleteButton.addEventListener("click", (event) => {
-      this.#deleteButtonHandler(this, event);
+      this.#deleteButtonHandler(this._id);
     });
   }
 
-  deleteCard (event) {
-    event.target.closest(".card").remove();
+  deleteCard () {
+    // event.target.closest(".card").remove();
+    this.#card.remove();
   }
 
   #addImageEventListener () {
@@ -82,14 +85,14 @@ export default class Card {
     this.#deleteButton = this.#card.querySelector(".card__delete");
     this.#fillMarkupWithData();
     this.#addEventListeners();
-    console.log(this)
-    if (this.#userId === this.#cardOwner) {
-      this.#deleteButton.disabled = false;
+    
+    if (!this.isMine) {
+      // this.#deleteButton.disabled = false;
+      this.#deleteButton.hidden = true;
     }
-    else{
-      this.#deleteButton.disabled = true;
-    }
-
+    // else{
+    //   this.#deleteButton.disabled = true;
+    // }
     return this.#card;
   }
 

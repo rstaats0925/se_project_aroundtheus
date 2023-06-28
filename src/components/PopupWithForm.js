@@ -22,19 +22,6 @@ export default class PopupWithForm extends Popup {
     return inputInfo;
   }
 
-  setInputValues({name, about}) {
-    this.#form.querySelector("#profile-input-username").value = name;
-    this.#form.querySelector("#profile-input-about").value = about;
-  }
-
-  changeButtonText (isLoading) {
-    if (isLoading) {
-      this.#submitButton.textContent = "Saving...";
-    } else {
-      this.#submitButton.textContent = "Save";
-    }
-  }
-
   setEventListeners() {
     super.setEventListeners();
     
