@@ -18,14 +18,6 @@ export default class Popup {
     this.#removeHandleEscClose();
   }
 
-  changeButtonText (isLoading) {
-    if (isLoading) {
-      this.submitButton.textContent = "Saving...";
-    } else {
-      this.submitButton.textContent = "Save";
-    }
-  }
-
   #closeModalOnRemoteClick(event) {
     if (event.target === event.currentTarget) {
       this.close();

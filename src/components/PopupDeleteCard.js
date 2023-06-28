@@ -8,6 +8,14 @@ export default class PopupDeleteCard extends Popup {
     this.form = this.modalElement.querySelector(".modal__form");
   }
 
+  changeButtonText (isLoading) {
+    if (isLoading) {
+      this.submitButton.textContent = "Saving...";
+    } else {
+      this.submitButton.textContent = "Yes";
+    }
+  }
+
   setSubmitAction(callback) {
     this.submitHandler = callback;
   }
