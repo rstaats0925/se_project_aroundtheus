@@ -13,10 +13,12 @@ export default class Card {
   #userId;
   #cardOwner;
   #likeCounter;
+  #likes;
 
-  constructor ({name, link, owner, _id}, userId, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
+  constructor ({name, link, owner, _id, likes}, userId, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
     this.#title = name;
     this.#link = link;
+    this.#likes = likes.length;
     this.#userId = userId;
     this.isMine = (userId === owner._id);
     this._id = _id;
@@ -37,6 +39,7 @@ export default class Card {
     this.#cardImage.src = this.#link;
     this.#cardImage.alt = this.#title;
     this.#cardCaption.textContent = this.#title;
+    this.#likeCounter.textContent = this.#likes;
   }
 
   #addLikeButtonEventListener () {
