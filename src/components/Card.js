@@ -11,14 +11,15 @@ export default class Card {
   #deleteButtonHandler;
   #likeButtonHandler;
   #userId;
-  #cardOwner;
-  #likeCounter;
   #likes;
+  #likeCounter;
+  #numberOfLikes;
 
   constructor ({name, link, owner, _id, likes}, userId, cardTemplateSelector, handleImageClick, deleteButtonHandler, likeButtonHandler) {
     this.#title = name;
     this.#link = link;
-    this.#likes = likes.length;
+    this.#numberOfLikes = likes.length;
+    this.#likes = likes;
     this.#userId = userId;
     this.isMine = (userId === owner._id);
     this._id = _id;
@@ -39,7 +40,17 @@ export default class Card {
     this.#cardImage.src = this.#link;
     this.#cardImage.alt = this.#title;
     this.#cardCaption.textContent = this.#title;
-    this.#likeCounter.textContent = this.#likes;
+    this.#likeCounter.textContent = this.#numberOfLikes;
+    this.#setLikeButton();
+  }
+
+  #setLikeButton() {
+    if (this.#likes.some(obj => {
+      return obj._id == this.#userId;
+    })) {
+      this.#likeButton.classList.add("card__like-button_inactive");
+      this.liked = true;
+    }
   }
 
   #addLikeButtonEventListener () {
