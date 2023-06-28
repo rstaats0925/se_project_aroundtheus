@@ -29,6 +29,6 @@ export default class UserInfo {
 
   setAvatar({avatar}) {
     this.#avatar.src = avatar;
-    this.#avatar.alt = this.#profileUsername;
+    this.#avatar.alt = this.#profileUsername.textContent;
   }
 }
