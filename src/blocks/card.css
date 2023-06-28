@@ -32,6 +32,10 @@
   overflow: hidden;
 }
 
+.card__like-info {
+  text-align: center;
+}
+
 .card__like-button {
   border: none;
   box-sizing: border-box;
@@ -69,4 +73,8 @@
 
 .card__delete:hover {
   opacity: 0.6;
+}
+
+.card__delete:disabled{
+  display:none;
 }

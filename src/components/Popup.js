@@ -3,6 +3,7 @@ export default class Popup {
 
   constructor (popupSelector) {
     this.modalElement = document.querySelector(popupSelector);
+    this.submitButton = this.modalElement.querySelector(".modal__save-button");
     this.closeButton = this.modalElement.querySelector(".modal__close-button");
     this.#handleEscClose = this.#handleEscapeClose.bind(this);
   }

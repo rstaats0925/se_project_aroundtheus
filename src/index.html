@@ -17,19 +17,18 @@
       </header>
       <main>
         <section class="profile page__section">
-          <img
-            class="avatar"
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="jacques-cousteau"
-          />
+          <div class="profile__avatar-container">
+            <img class="avatar" src="" alt="" />
+            <button class="avatar-edit-button" type="button"></button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__user-name">Jacques Cousteau</h1>
+            <h1 class="profile__user-name"></h1>
             <button
               class="profile__edit-button"
               id="profile-edit-btn"
               type="button"
             ></button>
-            <p class="profile__job">Explorer</p>
+            <p class="profile__about"></p>
           </div>
           <button
             class="profile__add-button"
@@ -58,7 +57,7 @@
             class="modal__input"
             id="profile-input-username"
             type="text"
-            name="user-name"
+            name="name"
             placeholder="name"
             minlength="2"
             maxlength="40"
@@ -67,15 +66,15 @@
           <span class="input-error" id="profile-input-username-error"></span>
           <input
             class="modal__input"
-            id="profile-input-job"
+            id="profile-input-about"
             type="text"
-            name="subtext"
-            placeholder="job"
+            name="about"
+            placeholder="about"
             minlength="2"
             maxlength="200"
             required
           />
-          <span class="input-error" id="profile-input-job-error"></span>
+          <span class="input-error" id="profile-input-about-error"></span>
           <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
@@ -90,8 +89,8 @@
             class="modal__input"
             id="image-input-title"
             type="text"
-            name="title"
-            placeholder="title"
+            name="name"
+            placeholder="name"
             minlength="2"
             maxlength="30"
             required
@@ -101,7 +100,7 @@
             class="modal__input"
             id="image-input-link"
             type="url"
-            name="image-link"
+            name="link"
             placeholder="link"
             required
           />
@@ -122,12 +121,50 @@
       </div>
     </div>
 
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close-button"
+          id="delete-card-close-button"
+        ></button>
+        <h2 class="modal__header">Are You Sure?</h2>
+        <form class="modal__form" id="delete-card-form">
+          <button class="modal__save-button" type="submit">Yes</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="avatar-edit-modal">
+      <div class="modal__container" id="avatar-modal">
+        <button
+          class="modal__close-button"
+          id="avatar-modal-close-button"
+        ></button>
+        <h2 class="modal__header">Change Profile Picture</h2>
+        <form class="modal__form" id="avatar-edit-form" novalidate>
+          <input
+            class="modal__input"
+            id="avatar-link"
+            type="url"
+            name="avatar"
+            placeholder="link"
+            required
+          />
+          <span class="input-error" id="avatar-link-error"></span>
+          <button class="modal__save-button" type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <img class="card__image" id="card-image" src="" alt="" />
         <div class="card__footer">
           <h2 class="card__caption"></h2>
-          <button class="card__like-button" type="button"></button>
+          <div class="card__like-info">
+            <button class="card__like-button" type="button"></button>
+            <div class="card__like-count"></div>
+          </div>
         </div>
         <button class="card__delete"></button>
       </li>
